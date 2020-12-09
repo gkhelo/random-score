@@ -83,7 +83,7 @@ main {
     grid-column: 1;
 }
 
-#tournaments {
+.tournaments {
     grid-row: 1;
     grid-column: 2;
 }
@@ -93,14 +93,16 @@ main {
     grid-column: 2;
 }
 
-/* component */
-.component-title-grid {
+/* component-collapsible */
+.component-collapsible {
     display: grid;
+    grid-template-columns: 4fr 1fr;
+
     background: #fcc133;
-    grid-template-columns: 4fr 1f;
+    border-bottom: #292930 1px solid;
 }
 
-.component-title {
+.component-collapsible-title {
     grid-row: 1;
     grid-column: 1;
 
@@ -112,7 +114,7 @@ main {
     padding-left: 10px;
 }
 
-.component-hide-show {
+.component-collapsible-button {
     grid-row: 1;
     grid-column: 2;
 
