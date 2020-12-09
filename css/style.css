@@ -132,7 +132,7 @@ main {
     margin-top: 5px;
 }
 
-.collapsible {
+.collapsible-tournament-table {
     cursor: pointer;
     background-color: #3eb650;
     width: 100%;
@@ -144,7 +144,7 @@ main {
     color: white;
 }
 
-.active, .collapsible:hover {
+.active, .collapsible-tournament-table:hover {
     background-color: #292930;
 }
 

@@ -7,10 +7,12 @@
         <meta name="keywords" content="football, scores, tournaments">
         
         <title>Random Scores</title>
+        
         <link rel="stylesheet" href="./css/style.css">
+        <script src="./js/scripts.js"></script>
     </head>
 
-    <body>
+    <body onload="startup()">
 
         <header>
             <div class="container">
@@ -150,7 +152,7 @@
                         <ul>
                             <li>
                                 <div class="single-tournament">
-                                    <button class="collapsible" aria-expanded="false">Premier League</button>
+                                    <button class="collapsible-tournament-table" aria-expanded="false">Premier League</button>
                                     <div class="tournament-table" hidden>
                                         <table>
                                             <tr class="tournament-table-header">
@@ -250,7 +252,7 @@
                             </li>
                             <li>
                                 <div class="single-tournament">
-                                    <button class="collapsible" aria-expanded="false">LaLiga</button>
+                                    <button class="collapsible-tournament-table" aria-expanded="false">LaLiga</button>
                                     <div class="tournament-table" hidden>
                                         <table>
                                             <tr class="tournament-table-header">
@@ -350,7 +352,7 @@
                             </li>
                             <li>
                                 <div class="single-tournament">
-                                    <button class="collapsible" aria-expanded="false">Bundesliga</button>
+                                    <button class="collapsible-tournament-table" aria-expanded="false">Bundesliga</button>
                                     <div class="tournament-table" hidden>
                                         <table>
                                             <tr class="tournament-table-header">
@@ -450,7 +452,7 @@
                             </li>
                             <li>
                                 <div class="single-tournament">
-                                    <button class="collapsible" aria-expanded="false">Seria A</button>
+                                    <button class="collapsible-tournament-table" aria-expanded="false">Seria A</button>
                                     <div class="tournament-table" hidden>
                                         <table>
                                             <tr class="tournament-table-header">
@@ -550,7 +552,7 @@
                             </li>
                             <li>
                                 <div class="single-tournament">
-                                    <button class="collapsible" aria-expanded="false">Ligue 1</button>
+                                    <button class="collapsible-tournament-table" aria-expanded="false">Ligue 1</button>
                                     <div class="tournament-table" hidden>
                                         <table>
                                             <tr class="tournament-table-header">
@@ -674,7 +676,5 @@
                 </div>
             </div>
         </main>
-
-        <script src="./js/scripts.js"></script>
     </body>
 </html>
