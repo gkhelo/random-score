@@ -1,0 +1,43 @@
+.match {
+    display: grid;
+    grid-template-columns: 2fr 4fr 1fr 2fr 1fr 4fr;
+
+    padding-bottom: 5px;
+    margin-bottom: 5px;
+
+    border-bottom: #292930 1px solid;
+}
+
+.match-status {
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.match-team {
+    font-size: 20px;
+}
+
+.team-logo-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.team-logo {
+    max-width: 24px;
+    max-height: 24px;
+
+    display: block;
+    margin-left: auto;
+    margin-right: auto
+}
+
+.match-score {
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.match-live {
+    color: #c00;
+}

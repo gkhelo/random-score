@@ -21,13 +21,19 @@ ul {
     list-style-type: none;
 }
 
-li {
-    padding: 0 20px;
-}
-
 img:hover {
     cursor: pointer;
-  }
+}
+
+.blinker {
+    animation: blinker 2s linear infinite;
+}
+
+@keyframes blinker {
+    50% {
+      opacity: 0;
+    }
+}
 
 /* header */
 header {
@@ -182,35 +188,6 @@ main {
 .tournament-matches li {
     margin-top: 5px;
     text-align: center;
-}
-
-.single-match {
-    display: grid;
-    grid-template-columns: 2fr 4fr 2fr 4fr;
-
-    padding-bottom: 5px;
-    margin-bottom: 5px;
-
-    border-bottom: #292930 1px solid;
-}
-
-.match-time {
-    text-align: center;
-    font-size: 18px;
-}
-
-.match-home-team {
-    font-size: 20px;
-}
-
-.match-score {
-    /* border: #292930 1px solid; */
-    text-align: center;
-    font-size: 20px;
-}
-
-.match-guest-team {
-    font-size: 20px;
 }
 
 /* good color combinations for this website:  292930, 3eb650, fcc133, e12b38 */
