@@ -17,9 +17,9 @@ function initializeMenuButton(menuId, popup) {
     button.addEventListener('click', () => popup.show());
 }
 
-// TODO: refactor collapsible components too
+// TODO: this function will be deleted in future
 function initializeCollapsibleComponents() {
-    let collapsibles = document.getElementsByClassName('component-collapsible');
+    let collapsibles = document.getElementsByClassName('collapsible');
     
     Array.prototype.forEach.call(collapsibles, c => {
         let target = c.nextElementSibling;

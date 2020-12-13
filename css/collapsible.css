@@ -1,0 +1,27 @@
+.collapsible {
+    display: grid;
+    grid-template-columns: 4fr 1fr;
+
+    background: #fcc133;
+    border-bottom: #292930 1px solid;
+}
+
+.collapsible-title {
+    grid-row: 1;
+    grid-column: 1;
+
+    text-decoration: none;
+    text-align: left;
+    font-size: 30px;
+    font-weight: bold;
+
+    padding-left: 10px;
+}
+
+.collapsible-button {
+    grid-row: 1;
+    grid-column: 2;
+
+    margin: auto;
+    text-align: right;
+}
