@@ -1,0 +1,26 @@
+{
+  "name": "random-score",
+  "version": "1.0.0",
+  "description": "Random Score",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index",
+    "dev": "nodemon index"
+  },
+  "dependencies": {
+    "express": "4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "2.0.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gkhelo/random-score.git"
+  },
+  "author": "Giorgi Khelashvili",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gkhelo/random-score/issues"
+  },
+  "homepage": "https://github.com/gkhelo/random-score#readme"
+}
