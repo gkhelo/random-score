@@ -1,9 +1,35 @@
 
 function startup() {
+    renderLeagueMatches();
+
     initializeMenuButtons();
 
     initializeCollapsibleComponents();
     initializeCollapsibleTournamentTables();
+}
+
+function renderLeagueMatches() {
+    let leagueMatches = fetchLeagueMatches();
+}
+
+function fetchLeagueMatches() {
+    fetch('/api/league_matches').then(res => res.json()).then(allLeagueMatches => {
+        allLeagueMatches.forEach(leagueMatches => {
+            console.log('leagueId', leagueMatches[0]);
+
+            leagueMatches[1].forEach(match => {
+                console.log('homeName', match.homeName);
+                console.log('homeLogo', match.homeLogo);
+                console.log('homeScore', match.homeScore);
+                console.log('guestName', match.guestName);
+                console.log('guestLogo', match.guestLogo);
+                console.log('guestScore', match.guestScore);
+            })
+        });
+    }).catch(function(error) {
+        console.log('fetch error: ', error);
+        return [];
+    });
 }
 
 function initializeMenuButtons() {
