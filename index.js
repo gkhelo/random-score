@@ -7,7 +7,7 @@ const app = express();
 app.use(express.static(path.join(__dirname, 'public')));
 
 // API Routes
-app.use('/api', require('./routes/api/scores.js'));
+app.use('/api', require('./routes/api/randomscores.js'));
 
 const PORT = process.env.PORT || 5000;
 

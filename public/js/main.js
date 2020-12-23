@@ -9,23 +9,37 @@ function startup() {
 }
 
 function renderLeagueMatches() {
-    let leagueMatches = fetchLeagueMatches();
+    let allLeagueMatches = fetchAllLeagueMatches();
+    
+    // let allMatchesDiv = document.getElementById('matches');
+    // allLeagueMatches.forEach(leagueMatches => {
+    //     allMatchesDiv.appendChild(LeagueMatches.create(leagueMatches));
+    // });
 }
 
-function fetchLeagueMatches() {
+function fetchAllLeagueMatches() {
     fetch('/api/league_matches').then(res => res.json()).then(allLeagueMatches => {
-        allLeagueMatches.forEach(leagueMatches => {
-            console.log('leagueId', leagueMatches[0]);
+        // allLeagueMatches.forEach(leagueMatches => {
+        //     console.log('id:', leagueMatches.id);
+        //     console.log('name:', leagueMatches.name)
 
-            leagueMatches[1].forEach(match => {
-                console.log('homeName', match.homeName);
-                console.log('homeLogo', match.homeLogo);
-                console.log('homeScore', match.homeScore);
-                console.log('guestName', match.guestName);
-                console.log('guestLogo', match.guestLogo);
-                console.log('guestScore', match.guestScore);
-            })
+        //     leagueMatches.matches.forEach(match => {
+        //         console.log('homeName', match.homeName);
+        //         console.log('homeLogo', match.homeLogo);
+        //         console.log('homeScore', match.homeScore);
+        //         console.log('guestName', match.guestName);
+        //         console.log('guestLogo', match.guestLogo);
+        //         console.log('guestScore', match.guestScore);
+        //     })
+        // });
+
+        let allMatchesDiv = document.getElementById('matches');
+        console.log(allLeagueMatches);
+        allLeagueMatches.forEach(leagueMatches => {
+            allMatchesDiv.appendChild(LeagueMatches.create(leagueMatches));
         });
+
+        // return allLeagueMatches;
     }).catch(function(error) {
         console.log('fetch error: ', error);
         return [];

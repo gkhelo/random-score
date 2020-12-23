@@ -1,0 +1,26 @@
+[
+    {
+        "id": 1,
+        "name": "Premier League"
+    },
+    {
+        "id": 2,
+        "name": "Bundesliga"
+    },
+    {
+        "id": 3,
+        "name": "Seria A"
+    },
+    {
+        "id": 4,
+        "name": "LaLiga"
+    },
+    {
+        "id": 5,
+        "name": "Erovnuli Liga"
+    },
+    {
+        "id": 6,
+        "name": "Eredivisie"
+    }
+]

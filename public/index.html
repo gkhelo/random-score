@@ -12,13 +12,13 @@
         <link rel="stylesheet" href="./css/popup.css">
         <link rel="stylesheet" href="./css/collapsible.css">
         <link rel="stylesheet" href="./css/match.css">
-        <link rel="stylesheet" href="./css/tournamentMatches.css">
+        <link rel="stylesheet" href="./css/leaguematches.css">
 
         <script src="./js/main.js"></script>
         <script src="./js/popup.js"></script>
         <script src="./js/collapsible.js"></script>
         <script src="./js/match.js"></script>
-        <script src="./js/tournamentMatches.js"></script>
+        <script src="./js/leaguematches.js"></script>
     </head>
 
     <body onload="startup()">
@@ -40,112 +40,7 @@
 
         <main>
             <div class="grid">
-                <div class="matches">
-                    <div class="tournament-matches">
-                        <div class="collapsible">
-                            <div class="collapsible-title">Premier League</div>
-                            <div class="collapsible-button">
-                                <img src="./images/slide-up.png"/>
-                            </div>
-                        </div>
-                        <ul>
-                            <li class="match">        
-                                <div class="match-time">
-                                    Finished
-                                </div>        
-                                <div class="match-home-team">
-                                    Burnley
-                                </div>
-                                <div class="match-score">
-                                    1 - 1
-                                </div>
-                                <div class="match-guest-team">
-                                    Everton
-                                </div>
-                            </li>
-                            <li class="match">
-                                <div class="match-time">
-                                    32
-                                </div>
-                                <div class="match-home-team">
-                                    Manchester City
-                                </div>
-                                <div class="match-score">
-                                    2 - 0
-                                </div>
-                                <div class="match-guest-team">
-                                    Fullham
-                                </div>
-                            </li>
-                            <li class="match">
-                                <div class="match-time">
-                                    32
-                                </div>
-                                <div class="match-home-team">
-                                    West Ham
-                                </div>
-                                <div class="match-score">
-                                    0 - 1
-                                </div>
-                                <div class="match-guest-team">
-                                    Manchester United
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="tournament-matches">
-                        <div class="collapsible">
-                            <div class="collapsible-title">La Liga</div>
-                            <div class="collapsible-button">
-                                <img src="./images/slide-up.png"/>
-                            </div>
-                        </div>
-                        <ul>
-                            <li class="match">        
-                                <div class="match-time">
-                                    87
-                                </div>        
-                                <div class="match-home-team">
-                                    Levante
-                                </div>
-                                <div class="match-score">
-                                    3 - 0
-                                </div>
-                                <div class="match-guest-team">
-                                    Getafe
-                                </div>
-                            </li>
-                            <li class="match">
-                                <div class="match-time">
-                                    Finished
-                                </div>
-                                <div class="match-home-team">
-                                    Sevilla
-                                </div>
-                                <div class="match-score">
-                                    0 - 1
-                                </div>
-                                <div class="match-guest-team">
-                                    Real Madrid
-                                </div>
-                            </li>
-                            <li class="match">
-                                <div class="match-time">
-                                    21:30
-                                </div>
-                                <div class="match-home-team">
-                                    Atl. Madrid
-                                </div>
-                                <div class="match-score">
-                                    Preview
-                                </div>
-                                <div class="match-guest-team">
-                                    Valladolid
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+                <div class="matches" id="matches"></div>
 
                 <div class="tournaments">
                     
