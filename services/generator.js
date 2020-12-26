@@ -3,7 +3,7 @@ const leagues = require('./leagues');
 const utils = require('./utils');
 
 const generator = {
-    generate: function() {
+    matches() {
         let allLeagues = leagues.getAll();
 
         let result = [];
@@ -54,6 +54,51 @@ const generator = {
                     matches: matches
                 });
             }
+        });
+
+        return result;
+    },
+
+    standings() {
+        let allLeagues = leagues.getAll();
+
+        let result = [];
+        allLeagues.forEach(league => {
+            let leagueTeams = teams.getByLeagueId(league.id);
+
+            let standings = [];
+
+            let games = utils.randomNumber(5, 10);
+            leagueTeams.forEach(team => {
+                let wonDrawLost = utils.wonDrawLost(games);
+                let won = wonDrawLost[0];
+                let draw = wonDrawLost[1];
+                let lost = wonDrawLost[2];
+                
+                let diff = utils.goalsDiff(won, draw, lost);
+                let pts = utils.points(won, draw, lost);
+
+                standings.push({
+                    name: team.name,
+                    games: games,
+                    won: won,
+                    draw: draw,
+                    lost: lost,
+                    diff: diff,
+                    points: pts,
+                    status: 0
+                });
+
+            });
+
+            utils.sortStandings(standings, league);
+
+            result.push({
+                id: league.id,
+                name: league.name,
+                standings: standings
+            });
+
         });
 
         return result;

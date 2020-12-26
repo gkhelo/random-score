@@ -1,26 +1,38 @@
 [
     {
         "id": 1,
-        "name": "Premier League"
+        "name": "Premier League",
+        "promotions": 4,
+        "relegations": 3
     },
     {
         "id": 2,
-        "name": "Bundesliga"
+        "name": "Bundesliga",
+        "promotions": 3,
+        "relegations": 3
     },
     {
         "id": 3,
-        "name": "Seria A"
+        "name": "Seria A",
+        "promotions": 3,
+        "relegations": 3
     },
     {
         "id": 4,
-        "name": "LaLiga"
+        "name": "LaLiga",
+        "promotions": 4,
+        "relegations": 3
     },
     {
         "id": 5,
-        "name": "Erovnuli Liga"
+        "name": "Erovnuli Liga",
+        "promotions": 2,
+        "relegations": 1
     },
     {
         "id": 6,
-        "name": "Eredivisie"
+        "name": "Eredivisie",
+        "promotions": 3,
+        "relegations": 2
     }
 ]

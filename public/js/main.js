@@ -1,6 +1,6 @@
 
 function startup() {
-    renderLeagueMatches();
+    render();
 
     initializeMenuButtons();
 
@@ -8,42 +8,9 @@ function startup() {
     initializeCollapsibleTournamentTables();
 }
 
-function renderLeagueMatches() {
-    let allLeagueMatches = fetchAllLeagueMatches();
-    
-    // let allMatchesDiv = document.getElementById('matches');
-    // allLeagueMatches.forEach(leagueMatches => {
-    //     allMatchesDiv.appendChild(LeagueMatches.create(leagueMatches));
-    // });
-}
-
-function fetchAllLeagueMatches() {
-    fetch('/api/league_matches').then(res => res.json()).then(allLeagueMatches => {
-        // allLeagueMatches.forEach(leagueMatches => {
-        //     console.log('id:', leagueMatches.id);
-        //     console.log('name:', leagueMatches.name)
-
-        //     leagueMatches.matches.forEach(match => {
-        //         console.log('homeName', match.homeName);
-        //         console.log('homeLogo', match.homeLogo);
-        //         console.log('homeScore', match.homeScore);
-        //         console.log('guestName', match.guestName);
-        //         console.log('guestLogo', match.guestLogo);
-        //         console.log('guestScore', match.guestScore);
-        //     })
-        // });
-
-        let allMatchesDiv = document.getElementById('matches');
-        console.log(allLeagueMatches);
-        allLeagueMatches.forEach(leagueMatches => {
-            allMatchesDiv.appendChild(LeagueMatches.create(leagueMatches));
-        });
-
-        // return allLeagueMatches;
-    }).catch(function(error) {
-        console.log('fetch error: ', error);
-        return [];
-    });
+function render() {
+    Render.matches();
+    Render.standings();
 }
 
 function initializeMenuButtons() {
