@@ -1,7 +1,5 @@
 const LeagueStandings = {
     create(leagueStandings) {
-        console.log(leagueStandings);
-
         let mainDiv = document.createElement('div');
 
         let title = new Collapsible('Leagues', '#fcc133', '#000000').create();
@@ -88,6 +86,7 @@ const LeagueStandings = {
         }
         tr.innerHTML = `
             <td>${position}</td>
+            <td><img class="team-logo" src="${team.logo}" /></td>
             <td>${team.name}</td>
             <td>${team.games}</td>
             <td>${team.won}</td>

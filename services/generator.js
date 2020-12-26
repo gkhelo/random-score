@@ -80,6 +80,7 @@ const generator = {
 
                 standings.push({
                     name: team.name,
+                    logo: team.logo,
                     games: games,
                     won: won,
                     draw: draw,
