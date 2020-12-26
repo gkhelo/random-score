@@ -19,11 +19,7 @@ const Render = {
             .then(response => response.json())
             .then(allLeagueStandings => {
                 let allStandingsDiv = document.getElementById('standings');
-
-                allLeagueStandings.forEach(leagueStandings => {
-                    console.log(leagueStandings);
-                    allStandingsDiv.appendChild(LeagueStandings.create(leagueStandings));
-                });
+                allStandingsDiv.appendChild(LeagueStandings.create(allLeagueStandings));
             })
             .catch(error => {
                 console.log('Error occured during fetching standings from server:', error);

@@ -1,11 +1,7 @@
 
 function startup() {
     render();
-
-    initializeMenuButtons();
-
-    initializeCollapsibleComponents();
-    initializeCollapsibleTournamentTables();
+    initialize();
 }
 
 function render() {
@@ -13,10 +9,15 @@ function render() {
     Render.standings();
 }
 
+function initialize() {
+    initializeMenuButtons();
+    initializeCollapsibleComponents();
+}
+
 function initializeMenuButtons() {
     initializeMenuButton('search-menu', new SearchBarPopup());
     initializeMenuButton('best-teams-menu', new TeamsPopup());
-    initializeMenuButton('best-tournaments-menu', new TournamentsPopup());
+    initializeMenuButton('best-leagues-menu', new TournamentsPopup());
 }
 
 function initializeMenuButton(menuId, popup) {
@@ -40,21 +41,6 @@ function initializeCollapsibleComponents() {
                 target.style.display = 'block';
                 img.src = './images/slide-up.png';
             }
-        });
-    });
-}
-
-function initializeCollapsibleTournamentTables() {
-    let collapsibleTables = document.getElementsByClassName('collapsible-tournament-table');
-
-    Array.prototype.forEach.call(collapsibleTables, c => {
-        let target = c.nextElementSibling;
-
-        c.addEventListener('click', function() {
-            let expanded = c.getAttribute('aria-expanded') === 'true';
-
-            c.setAttribute('aria-expanded', !expanded);
-            target.hidden = expanded;
         });
     });
 }

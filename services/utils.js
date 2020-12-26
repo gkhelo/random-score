@@ -57,7 +57,7 @@ const utils = {
     },
 
     sortStandings(standings, league) {
-        standings.sort((t1, t2) => t1.points < t2.points);
+        standings.sort((t1, t2) => t2.points - t1.points);
             
         let i = 0;
         standings.forEach(team => {
