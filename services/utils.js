@@ -45,7 +45,7 @@ exports.randomMatches = function(league, teams) {
 }
 
 exports.randomNumber = function(from, to) {
-    return from + Math.floor(Math.random() * (to + 1));
+    return from + Math.floor(Math.random() * (to - from + 1));
 }
 
 exports.randomUniqueNumbers = function(from, to, size) {
@@ -74,13 +74,36 @@ exports.randomUniqueNumbers = function(from, to, size) {
     return result;
 }
 
+exports.randomPair = function(from, to, used) {
+    let a, b;
+
+    while (true) {
+        let num = this.randomNumber(from, to);
+        if (used.indexOf(num) == -1) {
+            a = num;
+            break;
+        }
+    }
+
+    while (true) {
+        let num = this.randomNumber(from, to);
+        if (a != num && used.indexOf(num) == -1) {
+            b = num;
+            break;
+        }
+    }
+
+    return [a, b];
+}
+
 exports.randomStatus = function() {
     let rand = this.randomNumber(0, 2);
     return -1 + rand;
 }
 
-exports.time = function() {
-    return '20:00';
+exports.randomTime = function() {
+    let time = this.randomNumber(15, 21);
+    return time.toString().concat(':00');
 }
 
 exports.wonDrawLost = function(games) {
@@ -114,4 +137,42 @@ exports.sortStandings = function(standings, league) {
             team.status = 1;
         }
     })
+}
+
+exports.randomSchedule = function(teams) {
+    let numDays = 60;
+
+    let teamUsedDays = new Map();
+    for (let i = 0; i < teams.length; i++) {
+        teamUsedDays[i] = [];
+    }
+
+    let matches = [];
+    for (let i = 0; i < teams.length; i++) {
+        for (let j = 0; j < teams.length && i != j; j++) {
+            let days = this.randomPair(1, numDays, teamUsedDays[i].concat(teamUsedDays[j]));
+
+            matches.push({
+                home: teams[i],
+                guest: teams[j],
+                day: days[0],
+                time: this.randomTime()
+            });
+
+            matches.push({
+                home: teams[j],
+                guest: teams[i],
+                day: days[1],
+                time: this.randomTime()
+            });
+
+            teamUsedDays[i].push(days[0]);
+            teamUsedDays[i].push(days[1]);
+
+            teamUsedDays[j].push(days[0]);
+            teamUsedDays[j].push(days[1]);
+        }
+    }
+
+    return matches;
 }

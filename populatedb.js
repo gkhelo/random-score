@@ -4,6 +4,9 @@ var async = require('async');
 
 var League = require('./models/league');
 var Team = require('./models/team');
+var Match = require('./models/match');
+
+var utils = require('./services/utils');
 
 var mongoose = require('mongoose');
 var mongoDB = 'mongodb://127.0.0.1/test';
@@ -12,7 +15,9 @@ mongoose.Promise = global.Promise;
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
-var leagues = new Map();
+var leaguesMap = new Map();
+var leagues = [];
+var teams = [];
 
 function leagueCreate(id, name, promotions, relegations, cb) {
     let league = new League({
@@ -28,7 +33,8 @@ function leagueCreate(id, name, promotions, relegations, cb) {
             return;
         }
 
-        leagues[id] = league;
+        leaguesMap[id] = league;
+        leagues.push(league);
         cb(null, league);
     });
 }
@@ -48,7 +54,28 @@ function teamCreate(name, code, logo, league, cb) {
             return;
         }
 
+        teams.push(team);
         cb(null, team);
+    })
+}
+
+function matchCreate(league, homeTeam, guestTeam, day, time, cb) {
+    let match = new Match({
+        league: league,
+        homeTeam: homeTeam,
+        guestTeam: guestTeam,
+        day: day,
+        time: time
+    });
+
+    match.save(err => {
+        if (err) {
+            console.log('Error occurred during match creation', err);
+            cb(err, null);
+            return;
+        }
+
+        cb(null, match);
     })
 }
 
@@ -73,16 +100,45 @@ function createTeams(callback) {
     let creates = [];
     teams.forEach(team => {
         creates.push(function(cb) {
-            teamCreate(team.name, team.code, team.logo, leagues[team.league_id], cb)
+            teamCreate(team.name, team.code, team.logo, leaguesMap[team.league_id], cb)
         });
     });
 
     async.parallel(creates, callback);
 }
 
+function createMatches(callback) {
+    let creates = [];
+    leagues.forEach(league => {
+        let teams = getLeagueTeams(league);
+        let matches = utils.randomSchedule(teams);
+
+        matches.forEach(match => {
+            creates.push(function(cb) {
+                matchCreate(league, match.home, match.guest, match.day, match.time, cb);
+            });
+        })
+    })
+
+    async.parallel(creates, callback);
+}
+
+// helper functions start
+function getLeagueTeams(league) {
+    let result = [];
+    teams.forEach(team => {
+        if (team.league === league) {
+            result.push(team);
+        }
+    })
+    return result;
+}
+// helper functions end
+
 async.series([
     createLeagues,
-    createTeams
+    createTeams,
+    createMatches
 ],
 function(err, results) {
     if (err) {
