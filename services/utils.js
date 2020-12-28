@@ -8,7 +8,7 @@ exports.randomMatches = function(league, teams) {
         let guest = teams[teamIndices[i + 1]];
 
         let status = this.randomStatus();
-        let startTime = this.time();
+        let startTime = this.randomTime();
 
         let currentTime = 0;
         let homeScore = 0;

@@ -15,7 +15,8 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 app.use(express.static(path.join(__dirname, 'public')));
 
 // API Routes
-app.use('/api', require('./routes/randomscores.js'));
+app.use('/api', require('./routes/randomscores'));
+app.use('/api/matches', require('./routes/matches'));
 
 const PORT = process.env.PORT || 5000;
 
