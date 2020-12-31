@@ -10,7 +10,7 @@ const Render = {
                 });
             })
             .catch(error => {
-                console.log('Error occured during fetching matches from server:', error);
+                console.log('Error occured during rendering matches:', error);
             });
     },
 
@@ -22,7 +22,7 @@ const Render = {
                 allStandingsDiv.appendChild(LeagueStandings.create(allLeagueStandings));
             })
             .catch(error => {
-                console.log('Error occured during fetching standings from server:', error);
+                console.log('Error occured during rendering standings:', error);
             });
     }
 }

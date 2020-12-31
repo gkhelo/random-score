@@ -3,7 +3,7 @@ const LeagueMatches = {
         let leagueMatchesDiv = document.createElement('div');
         leagueMatchesDiv.className = 'league-matches';
 
-        let title = new Collapsible(leagueMatches.name, '#fcc133', '#000000').create();
+        let title = Collapsible.create(leagueMatches.name, '#fcc133', '#000000');
         let matchesUl = document.createElement('ul');
 
         leagueMatches.matches.forEach(match => {

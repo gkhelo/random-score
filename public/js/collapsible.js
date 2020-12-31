@@ -1,38 +1,32 @@
-class Collapsible {
-    constructor(title, background, color) {
-        this.title = title;
-        this.background = background;
-        this.color = color;
-    }
+const Collapsible = {
+    create(title, background, color) {
+        let mainDiv = this.createMainDiv(background);
+        let titleDiv = this.createTitle(title, color);
+        let button = this.createButton(mainDiv);
 
-    create() {
-        let collapsible = this.createCollapsible();
-        let title = this.createTitle();
-        let button = this.createButton(collapsible);
+        mainDiv.appendChild(titleDiv);
+        mainDiv.appendChild(button);
 
-        collapsible.appendChild(title);
-        collapsible.appendChild(button);
-
-        return collapsible;
-    }
+        return mainDiv;
+    },
 
     // helper methods
-    createCollapsible() {
+    createMainDiv(background) {
         let collapsible = document.createElement('div');
         collapsible.className = 'collapsible';
-        collapsible.style.background = this.background;
+        collapsible.style.background = background;
 
         return collapsible;
-    }
+    },
 
-    createTitle() {
-        let title = document.createElement('div');
-        title.className = 'collapsible-title';
-        title.innerText = this.title;
-        title.style.color = this.color;
+    createTitle(title, color) {
+        let titleDiv = document.createElement('div');
+        titleDiv.className = 'collapsible-title';
+        titleDiv.innerText = title;
+        titleDiv.style.color = color;
 
-        return title;
-    }
+        return titleDiv;
+    },
 
     createButton(collapsible) {
         let button = document.createElement('div');
@@ -42,7 +36,7 @@ class Collapsible {
         button.appendChild(img);
 
         return button;
-    }
+    },
 
     createImage(collapsible) {
         let img = document.createElement('img');

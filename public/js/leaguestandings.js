@@ -2,7 +2,7 @@ const LeagueStandings = {
     create(leagueStandings) {
         let mainDiv = document.createElement('div');
 
-        let title = new Collapsible('Leagues', '#fcc133', '#000000').create();
+        let title = Collapsible.create('Leagues', '#fcc133', '#000000');
 
         let standingsUl = document.createElement('ul');
         leagueStandings.forEach(leagueStanding => {
