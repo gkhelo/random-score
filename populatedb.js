@@ -6,7 +6,7 @@ var League = require('./models/league');
 var Team = require('./models/team');
 var Match = require('./models/match');
 
-var utils = require('./services/utils');
+var generator = require('./services/generator');
 
 var mongoose = require('mongoose');
 var mongoDB = 'mongodb://127.0.0.1/test';
@@ -111,7 +111,7 @@ function createMatches(callback) {
     let creates = [];
     leagues.forEach(league => {
         let teams = getLeagueTeams(league);
-        let matches = utils.randomSchedule(teams);
+        let matches = generator.schedule(teams);
 
         matches.forEach(match => {
             creates.push(function(cb) {

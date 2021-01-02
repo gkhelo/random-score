@@ -15,14 +15,14 @@ const Render = {
     },
 
     standings() {
-        fetch('/api/league_standings')
-            .then(response => response.json())
-            .then(allLeagueStandings => {
-                let allStandingsDiv = document.getElementById('standings');
-                allStandingsDiv.appendChild(LeagueStandings.create(allLeagueStandings));
-            })
-            .catch(error => {
-                console.log('Error occured during rendering standings:', error);
-            });
+        // fetch('/api/league_standings')
+        //     .then(response => response.json())
+        //     .then(allLeagueStandings => {
+        //         let allStandingsDiv = document.getElementById('standings');
+        //         allStandingsDiv.appendChild(LeagueStandings.create(allLeagueStandings));
+        //     })
+        //     .catch(error => {
+        //         console.log('Error occured during rendering standings:', error);
+        //     });
     }
 }

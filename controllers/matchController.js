@@ -1,6 +1,15 @@
 var Match = require('../models/match');
 var simulator = require('../services/simulator');
 
+exports.init = function() {
+    Match.findOne({ status: 'init' })
+        .exec((err, res) => {
+            if (err) {
+                console.log('Error occurred during initializing Match schema');
+            }
+        });
+}
+
 exports.getByDay = function(day, populate, callback) {
     let query = Match.find({ day: day });
 

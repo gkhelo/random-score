@@ -11,6 +11,10 @@ mongoose.Promise = global.Promise;
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
+// Initialize db schemas
+var utils = require('./services/utils');
+utils.initSchemas();
+
 // Start simulation
 var simulator = require('./services/simulator');
 simulator.start();
@@ -19,7 +23,6 @@ simulator.start();
 app.use(express.static(path.join(__dirname, 'public')));
 
 // API Routes
-app.use('/api', require('./routes/randomscores'));
 app.use('/api/matches', require('./routes/matches'));
 
 const PORT = process.env.PORT || 5000;

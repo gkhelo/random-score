@@ -1,6 +1,7 @@
 var matchController = require('../controllers/matchController');
 
 var utils = require('./utils');
+var random = require('./random');
 
 var day = 1, hour = 14, minute = 55;
 var interval;
@@ -48,7 +49,7 @@ function updateMatches() {
         matches.forEach(match => {
             match.minute++;
 
-            let goal = utils.randomGoal();
+            let goal = random.goal();
             if (goal == 'H') {
                 match.homeScore++;
             } else if (goal == 'G') {
