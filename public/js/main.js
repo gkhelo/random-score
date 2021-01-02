@@ -2,6 +2,8 @@
 function startup() {
     render();
     initialize();
+
+    Simulator.start();
 }
 
 function render() {

@@ -19,23 +19,28 @@ function groupByLeague(matches) {
         result.push({
             id: league._id,
             name: league.name,
-            matches: matches
-        })
+            matches: matches.sort((m1, m2) => {
+                let start1 = parseInt(m1.time.substring(0, 2));
+                let start2 = parseInt(m2.time.substring(0, 2));
+
+                return start1 - start2;
+            })
+        });
     }
 
     return result;
 }
 
-router.get('/:day', (req, res) => {
-    matchController.getByDay(req.params.day, matches => {
+router.get('/filter/:day', (req, res) => {
+    matchController.getByDay(req.params.day, true, matches => {
         res.send(JSON.stringify(groupByLeague(matches)));
-    })
+    });
 });
 
-router.get('/:day/:status', (req, res) => {
-    matchController.getByDayAndStatus(req.params.day, req.params.status, matches => {
+router.get('/live', (req, res) => {
+    matchController.getLiveMatches(matches => {
         res.send(JSON.stringify(matches));
-    })
+    });
 });
 
 module.exports = router;

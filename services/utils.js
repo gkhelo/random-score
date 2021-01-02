@@ -106,6 +106,25 @@ exports.randomTime = function() {
     return time.toString().concat(':00');
 }
 
+exports.randomGoal = function() {
+    let rand = this.randomNumber(0, 40);
+    if (rand == 0) {
+        return 'H'; // home
+    } else if (rand == 1) {
+        return 'G'; // guest
+    } else {
+        return 'N'; // none
+    }
+}
+
+exports.getTime = function(hour, minute) {
+    if (minute < 10) {
+        return hour + ':0' + minute;
+    } else {
+        return hour + ':' + minute;
+    }
+}
+
 exports.wonDrawLost = function(games) {
     let won = utils.randomNumber(0, games);
     games -= won;

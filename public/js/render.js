@@ -1,6 +1,6 @@
 const Render = {
     matches() {
-        fetch('/api/matches/2')
+        fetch('/api/matches/filter/1')
             .then(response => response.json())
             .then(allLeagueMatches => {
                 let allMatchesDiv = document.getElementById('matches');

@@ -11,6 +11,10 @@ mongoose.Promise = global.Promise;
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
+// Start simulation
+var simulator = require('./services/simulator');
+simulator.start();
+
 // Set static folder
 app.use(express.static(path.join(__dirname, 'public')));
 
