@@ -6,7 +6,7 @@ const Render = {
                 let allMatchesDiv = document.getElementById('matches');
 
                 allLeagueMatches.forEach(leagueMatches => {
-                    allMatchesDiv.appendChild(Matches.create(leagueMatches));
+                    allMatchesDiv.appendChild(Match.create(leagueMatches));
                 });
             })
             .catch(error => {

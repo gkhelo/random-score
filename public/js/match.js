@@ -1,4 +1,4 @@
-const Matches = {
+const Match = {
     create(leagueMatches) {
         let leagueMatchesDiv = document.createElement('div');
         leagueMatchesDiv.className = 'league-matches';
