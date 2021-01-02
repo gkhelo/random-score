@@ -1,12 +1,12 @@
 const Render = {
     matches() {
-        fetch('/api/league_matches')
+        fetch('/api/matches/2')
             .then(response => response.json())
             .then(allLeagueMatches => {
                 let allMatchesDiv = document.getElementById('matches');
 
                 allLeagueMatches.forEach(leagueMatches => {
-                    allMatchesDiv.appendChild(LeagueMatches.create(leagueMatches));
+                    allMatchesDiv.appendChild(Matches.create(leagueMatches));
                 });
             })
             .catch(error => {
