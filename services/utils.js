@@ -1,11 +1,13 @@
 var leagueController = require('../controllers/leagueController');
 var matchController = require('../controllers/matchController');
 var teamController = require('../controllers/teamController');
+var resultController = require('../controllers/resultController');
 
 exports.initSchemas = function() {
     leagueController.init();
     matchController.init();
     teamController.init();
+    resultController.init();
 }
 
 exports.getTime = function(hour, minute) {
@@ -57,4 +59,24 @@ exports.groupByLeague = function(matches) {
     }
 
     return result;
+}
+
+exports.getResult = function(myScore, otherScore) {
+    if (myScore > otherScore) {
+        return 'W';
+    } else if (myScore < otherScore) {
+        return 'L';
+    } else {
+        return 'D';
+    }
+}
+
+exports.getPoints = function(result) {
+    if (result == 'W') {
+        return 3;
+    } else if (result == 'D') {
+        return 1;
+    } else {
+        return 0;
+    }
 }

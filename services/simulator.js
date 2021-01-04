@@ -1,4 +1,5 @@
 var matchController = require('../controllers/matchController');
+var resultController = require('../controllers/resultController');
 
 var utils = require('./utils');
 var random = require('./random');
@@ -37,7 +38,7 @@ function updateTime() {
     updateHour();
     updateDay();
 
-    logTime()
+    logTime();
 }
 
 function startMatches() {
@@ -58,11 +59,17 @@ function updateMatches() {
 
             if (match.minute == 90) {
                 match.status = 'FINISHED';
+                saveResults(match);
             }
 
             match.save();
         });
     });
+}
+
+function saveResults(match) {
+    resultController.update(match.homeTeam, match.league, utils.getResult(match.homeScore, match.guestScore), match.homeScore - match.guestScore);
+    resultController.update(match.guestTeam, match.league, utils.getResult(match.guestScore, match.homeScore), match.guestScore - match.homeScore);
 }
 
 function go() {
@@ -75,6 +82,7 @@ function go() {
 
 exports.start = function() {
     matchController.startup();
+    resultController.startup();
 
     interval = setInterval(go, 1000);
 }

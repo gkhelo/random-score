@@ -5,6 +5,7 @@ var async = require('async');
 var League = require('./models/league');
 var Team = require('./models/team');
 var Match = require('./models/match');
+var Result = require('./models/result');
 
 var generator = require('./services/generator');
 
@@ -56,6 +57,23 @@ function teamCreate(name, code, logo, league, cb) {
 
         teams.push(team);
         cb(null, team);
+    })
+}
+
+function resultCreate(team, league, cb) {
+    let result = new Result({
+        team: team,
+        league: league
+    });
+
+    result.save(err => {
+        if (err) {
+            console.log('Error occurred during result creation', err);
+            cb(err, null);
+            return;
+        }
+
+        cb(null, result);
     })
 }
 
@@ -123,6 +141,17 @@ function createMatches(callback) {
     async.parallel(creates, callback);
 }
 
+function createResults(callback) {
+    let creates = [];
+    teams.forEach(team => {
+        creates.push(function(cb) {
+            resultCreate(team, team.league, cb);
+        });
+    })
+
+    async.parallel(creates, callback);
+}
+
 // helper functions start
 function getLeagueTeams(league) {
     let result = [];
@@ -138,7 +167,8 @@ function getLeagueTeams(league) {
 async.series([
     createLeagues,
     createTeams,
-    createMatches
+    createMatches,
+    createResults
 ],
 function(err, results) {
     if (err) {
