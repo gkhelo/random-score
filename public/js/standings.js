@@ -1,4 +1,4 @@
-const LeagueStandings = {
+const Standings = {
     create(leagueStandings) {
         let mainDiv = document.createElement('div');
 
@@ -10,7 +10,7 @@ const LeagueStandings = {
             let singleLeagueDiv = document.createElement('div');
             singleLeagueDiv.className = 'single-league';
 
-            let table = this.createTable(leagueStanding.standings, leagueStanding.name);
+            let table = this.createTable(leagueStanding.standings, leagueStanding.promotions, leagueStanding.relegations);
 
             singleLeagueDiv.appendChild(this.createButton(leagueStanding.name, table));
             singleLeagueDiv.appendChild(table);
@@ -40,7 +40,7 @@ const LeagueStandings = {
         return btn;
     },
 
-    createTable(standings) {
+    createTable(standings, promotions, relegations) {
         let tableDiv = document.createElement('div');
         tableDiv.className = 'league-table';
         tableDiv.style.display = 'none';
@@ -49,9 +49,9 @@ const LeagueStandings = {
 
         table.appendChild(this.createTableHeader());
         let position = 0;
-        standings.forEach(team => {
+        standings.forEach(result => {
             position++;
-            table.appendChild(this.createTeamInfo(team, position));
+            table.appendChild(this.createResult(result, position, this.getClassName(position, promotions, relegations, standings.length)));
         });
 
         tableDiv.appendChild(table);
@@ -75,27 +75,30 @@ const LeagueStandings = {
         return tr;
     },
 
-    createTeamInfo(team, position) {
+    createResult(result, position, className) {
         let tr = document.createElement('tr');
-        if (team.status == 0) {
-            tr.className = 'league-table-relegation';
-        } else if (team.status == 1) {
-            tr.className = 'league-table-normal';
-        } else {
-            tr.className = 'league-table-promotion';
-        }
+        tr.className = className;
         tr.innerHTML = `
             <td>${position}</td>
-            <td><img class="team-logo" src="${team.logo}" /></td>
-            <td>${team.name}</td>
-            <td>${team.games}</td>
-            <td>${team.won}</td>
-            <td>${team.draw}</td>
-            <td>${team.lost}</td>
-            <td>${team.diff}</td>
-            <td>${team.points}</td>
+            <td><img class="team-logo" src="${result.team.logo}" /></td>
+            <td>${result.matches}</td>
+            <td>${result.win}</td>
+            <td>${result.draw}</td>
+            <td>${result.lost}</td>
+            <td>${result.diff}</td>
+            <td>${result.points}</td>
         `;
 
         return tr;
+    },
+
+    getClassName(position, promotions, relegations, length) {
+        if (position <= promotions) {
+            return 'league-table-promotion';
+        } else if (position >= length - relegations + 1) {
+            return 'league-table-relegation';
+        }
+
+        return 'league-table-normal';
     }
 }

@@ -24,6 +24,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // API Routes
 app.use('/api/matches', require('./routes/matches'));
+app.use('/api/standings', require('./routes/standings'));
 
 const PORT = process.env.PORT || 5000;
 

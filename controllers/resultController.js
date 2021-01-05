@@ -35,6 +35,20 @@ exports.update = function(team, league, result, diff) {
     });
 }
 
+exports.get = function(league, callback) {
+    Result.find({ league: league._id })
+        .populate('team', ['_id', 'name', 'logo'])
+        .exec(function(err, results) {
+            if (err) {
+                console.log('Error occurred during fetching results data from db', err);
+                callback([]);
+                return;       
+            }
+
+            callback(results);
+        });
+}
+
 // for testing
 exports.startup = function() {
     Result.updateMany(

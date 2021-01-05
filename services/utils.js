@@ -18,19 +18,15 @@ exports.getTime = function(hour, minute) {
     }
 }
 
-exports.sortStandings = function(standings, league) {
-    standings.sort((t1, t2) => t2.points - t1.points);
-        
-    let i = 0;
-    standings.forEach(team => {
-        i++;
-
-        if (i <= league.promotions) {
-            team.status = 2;
-        } else if (i <= standings.length - league.relegations) {
-            team.status = 1;
+exports.sortStandings = function(standings) {
+    standings.sort((r1, r2) => {
+        if (r1.points == r2.points) {
+            return r2.diff - r1.diff;
         }
-    })
+        return r2.points - r1.points;
+    });
+
+    return standings;
 }
 
 exports.groupByLeague = function(matches) {
