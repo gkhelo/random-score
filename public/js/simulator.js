@@ -12,7 +12,19 @@ const Simulator = {
             });
     },
 
+    fetchStandings() {
+        fetch('/api/standings')
+            .then(response => response.json())
+            .then(leagueStandings => {
+                Standings.update(leagueStandings);
+            })
+            .catch(error => {
+                console.log('Error occured during rendering standings:', error);
+            });
+    },
+
     start() {
         setInterval(this.fetchLiveMatches, 1000);
+        setInterval(this.fetchStandings, 60000);
     }
 }

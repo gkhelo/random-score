@@ -10,7 +10,7 @@ const Standings = {
             let singleLeagueDiv = document.createElement('div');
             singleLeagueDiv.className = 'single-league';
 
-            let table = this.createTable(leagueStanding.standings, leagueStanding.promotions, leagueStanding.relegations);
+            let table = this.createTable(leagueStanding);
 
             singleLeagueDiv.appendChild(this.createButton(leagueStanding.name, table));
             singleLeagueDiv.appendChild(table);
@@ -22,6 +22,15 @@ const Standings = {
         mainDiv.appendChild(title);
         mainDiv.appendChild(standingsUl);
         return mainDiv;
+    },
+
+    update(leagueStandings) {
+        leagueStandings.forEach(leagueStanding => {
+            let contentDiv = document.getElementById(leagueStanding.id)
+            contentDiv.innerHTML = '';
+
+            this.addResults(contentDiv, leagueStanding);
+        });
     },
 
     createButton(title, table) {
@@ -40,7 +49,7 @@ const Standings = {
         return btn;
     },
 
-    createTable(standings, promotions, relegations) {
+    createTable(leagueStanding) {
         let tableDiv = document.createElement('div');
         tableDiv.className = 'league-table';
         tableDiv.style.display = 'none';
@@ -48,11 +57,7 @@ const Standings = {
         let table = document.createElement('table');
 
         table.appendChild(this.createTableHeader());
-        let position = 0;
-        standings.forEach(result => {
-            position++;
-            table.appendChild(this.createResult(result, position, this.getClassName(position, promotions, relegations, standings.length)));
-        });
+        table.appendChild(this.createTableContent(leagueStanding));
 
         tableDiv.appendChild(table);
         return tableDiv;
@@ -75,12 +80,32 @@ const Standings = {
         return tr;
     },
 
+    createTableContent(leagueStanding) {
+        let contentDiv = document.createElement('div');
+        contentDiv.style.display = 'contents';
+        contentDiv.id = leagueStanding.id;
+
+        this.addResults(contentDiv, leagueStanding);
+
+        return contentDiv;
+    },
+
+    addResults(contentDiv, leagueStanding) {
+        let position = 0;
+        leagueStanding.standings.forEach(result => {
+            position++;
+            contentDiv.appendChild(this.createResult(
+                result, position, 
+                this.getClassName(position, leagueStanding.promotions, leagueStanding.relegations, leagueStanding.standings.length)));
+        });
+    },
+
     createResult(result, position, className) {
         let tr = document.createElement('tr');
         tr.className = className;
         tr.innerHTML = `
             <td>${position}</td>
-            <td><img class="team-logo" src="${result.team.logo}" /></td>
+            <td>${result.team.name}</td>
             <td>${result.matches}</td>
             <td>${result.win}</td>
             <td>${result.draw}</td>
