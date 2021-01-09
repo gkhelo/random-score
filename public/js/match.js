@@ -54,6 +54,7 @@ const Match = {
 
     update(match) {
         let matchDiv = document.getElementById(match._id);
+        matchDiv.style.display = 'grid';
         let childs = matchDiv.children;
 
         this.updateStatus(match, childs[0]);
@@ -66,7 +67,9 @@ const Match = {
                 this.boldTeamDiv(childs[5]);
             }
         }
-        this.updateScore(match.homeScore, match.guestScore, match.status, childs[3]);
+        if (match.status != 'NOT_STARTED') {
+            this.updateScore(match.homeScore, match.guestScore, match.status, childs[3]);
+        }
     },
 
     createStatus(match) {
@@ -148,5 +151,18 @@ const Match = {
         }
 
         scoreDiv.innerText = homeScore + ' - ' + guestScore;
+    },
+
+    hide(match) {
+        let matchDiv = document.getElementById(match._id);
+        matchDiv.style.display = 'none';
+    },
+
+    hideAll() {
+        let matchDivs = document.getElementsByClassName('match');
+
+        Array.prototype.forEach.call(matchDivs, matchDiv => {
+            matchDiv.style.display = 'none';
+        })
     }
 }

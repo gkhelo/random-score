@@ -5,14 +5,10 @@ const Render = {
             .then(allLeagueMatches => {
                 let mainDiv = document.getElementById('matches');
 
-                let matchesDiv = document.createElement('div');
-                matchesDiv.id = 'matches-div';
-                allLeagueMatches.forEach(leagueMatches => {
-                    matchesDiv.appendChild(Match.create(leagueMatches));
-                });
-
                 mainDiv.appendChild(MatchesFilter.create());
-                mainDiv.appendChild(matchesDiv);
+                allLeagueMatches.forEach(leagueMatches => {
+                    mainDiv.appendChild(Match.create(leagueMatches));
+                });
             })
             .catch(error => {
                 console.log('Error occured during rendering matches:', error);

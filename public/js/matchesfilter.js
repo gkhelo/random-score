@@ -18,21 +18,13 @@ const MatchesFilter = {
         li.innerHTML = `<label for="${status}">${name}</label>`
 
         let input = document.createElement('input');
-        input.className = 'matches-checkbox'
+        input.className = 'matches-checkbox';
+        input.id = 'filter-' + status;
         input.type = 'checkbox';
         input.value = status;
         input.checked = true;
         input.addEventListener('change', () => {
-            let checkboxes = document.getElementsByClassName('matches-checkbox');
-
-            let statuses = []
-            Array.prototype.forEach.call(checkboxes, checkbox => {
-                if (checkbox.checked) {
-                    statuses.push(checkbox.value);
-                }
-            })
-
-            this.filterMatches(statuses);
+            this.filterMatches(this.getCheckedStatuses());
         });
 
         li.appendChild(input)
@@ -43,16 +35,28 @@ const MatchesFilter = {
         json = JSON.stringify(statuses);
         fetch('/api/matches/filter/1/' + json)
             .then(response => response.json())
-            .then(allLeagueMatches => {
-                let matchesDiv = document.getElementById('matches-div');
-                matchesDiv.innerHTML = '';
-                
-                allLeagueMatches.forEach(leagueMatches => {
-                    matchesDiv.appendChild(Match.create(leagueMatches));
+            .then(matches => {
+                Match.hideAll();
+
+                matches.forEach(match => {
+                    Match.update(match);
                 });
             })
             .catch(error => {
                 console.log('Error occured during rendering matches:', error);
             });
+    },
+
+    getCheckedStatuses() {
+        let checkboxes = document.getElementsByClassName('matches-checkbox');
+
+        let statuses = []
+        Array.prototype.forEach.call(checkboxes, checkbox => {
+            if (checkbox.checked) {
+                statuses.push(checkbox.value);
+            }
+        });
+
+        return statuses;
     }
 }

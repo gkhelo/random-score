@@ -3,8 +3,14 @@ const Simulator = {
         fetch('/api/matches/live')
             .then(response => response.json())
             .then(liveMatches => {
+                let checkedStatuses = MatchesFilter.getCheckedStatuses();
+                
                 liveMatches.forEach(match => {
-                    Match.update(match);
+                    if (checkedStatuses.includes(match.status)) {
+                        Match.update(match);
+                    } else {
+                        Match.hide(match);
+                    }
                 });
             })
             .catch(error => {
