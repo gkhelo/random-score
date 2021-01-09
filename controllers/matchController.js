@@ -42,6 +42,31 @@ exports.getByStatus = function(status, callback) {
     });
 };
 
+exports.getByDayAndStatuses = function(day, statuses, populate, callback) {
+    let query = Match.find(
+        { 
+            day: day,
+            status: {
+                $in: statuses
+            },
+        });
+
+    if (populate) {
+        query.populate('league', 'name')
+            .populate('homeTeam', ['_id', 'name', 'logo'])
+            .populate('guestTeam', ['_id', 'name', 'logo'])
+    }
+        
+    query.exec(function(err, matches) {
+        if (err) {
+            console.log('Error occurred during fetching matches data from db', err);
+            callback([]);
+        }
+
+        callback(matches);
+    });
+};
+
 exports.getLiveMatches = function(callback) {
     let today = simulator.day;
     
@@ -66,7 +91,8 @@ exports.startMatches = function(day, time) {
     Match.updateMany(
         { 
             day: day, 
-            time: time 
+            time: time,
+            status: 'NOT_STARTED'
         },
         { 
             $set: { 
