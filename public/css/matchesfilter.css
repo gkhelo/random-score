@@ -2,8 +2,7 @@
     display: flex;
     flex-flow: row nowrap;
     
-    margin-bottom: 1em;
-    background: #3eb650;
+    background: #eee;
 }
 
 .status-filter {
@@ -30,38 +29,6 @@
 }
 
 .day-filter {
-    /* display: flex; */
-    align-items: center;
-    box-sizing: border-box;
+    position: relative;
     width: 20%;
-
-    justify-content: center;
-}
-
-.calendar {
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: space-between;
-
-    border: #292930 1px solid;
-    margin: 2px;
-    padding: 1px 5px;
-    font-size: 20px;
-    font-weight: bold;
-}
-
-.calendar-wrapper {
-    display: flex;
-    align-items: center;
-    width: 30%;
-
-    justify-content: center;
-}
-
-.day-wrapper {
-    display: flex;
-    align-items: center;
-    width: 70%;
-
-    justify-content: center;
 }

@@ -27,14 +27,8 @@ const MatchesFilter = {
         let dayFilterDiv = document.createElement('div');
         dayFilterDiv.className = 'day-filter';
 
-        dayFilterDiv.innerHTML = `
-            <div class="calendar">
-                <div class="calendar-wrapper">
-                    <img src="./images/calendar.png">
-                </div>
-                <div class="day-wrapper">Day 18</div>
-            </div>
-        `
+        dayFilterDiv.appendChild(this.calendar());
+        dayFilterDiv.appendChild(this.expandedCalendar());
 
         return dayFilterDiv;
     },
@@ -85,5 +79,49 @@ const MatchesFilter = {
         });
 
         return statuses;
+    },
+
+    calendar() {
+        let calendarDiv = document.createElement('div');
+        calendarDiv.className = 'calendar';
+
+        calendarDiv.innerHTML = `
+            <div class="calendar-wrapper">
+                <img src="./images/calendar.png">
+            </div>
+            <div class="selected-day" id="selected-day">Day 18</div>
+        `;
+
+        calendarDiv.addEventListener('click', () => {
+            let expanded = document.getElementById('expanded-calendar');
+
+            if (expanded.style.display == 'none') {
+                expanded.style.display = 'block';
+            } else {
+                expanded.style.display = 'none';
+            }
+        });
+
+        return calendarDiv;
+    },
+
+    expandedCalendar() {
+        let expandedCalendarDiv = document.createElement('div');
+        expandedCalendarDiv.className = 'expanded-calendar';
+        expandedCalendarDiv.id = 'expanded-calendar';
+
+        expandedCalendarDiv.style.display = 'none';
+
+        let daysUl = document.createElement('ul');
+        for (let day = 1; day <= 60; day++) {
+            let dayLi = document.createElement('li');
+            dayLi.className = 'day';
+            dayLi.innerHTML = 'Day ' + day;
+
+            daysUl.appendChild(dayLi);
+        }
+
+        expandedCalendarDiv.appendChild(daysUl);
+        return expandedCalendarDiv;
     }
 }

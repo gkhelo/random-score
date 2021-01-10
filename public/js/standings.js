@@ -34,7 +34,7 @@ const Standings = {
     },
 
     createButton(title, table) {
-        let btn = document.createElement('button');
+        let btn = document.createElement('div');
         btn.className = 'collapsible-league-table';
         btn.innerText = title;
 
