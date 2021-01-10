@@ -1,19 +1,67 @@
 .matches-filter {
+    display: flex;
+    flex-flow: row nowrap;
+    
     margin-bottom: 1em;
     background: #3eb650;
 }
 
-.matches-filter ul {
+.status-filter {
+    display: flex;
+    flex-flow: row nowrap;
+    box-sizing: border-box;
+    width: 80%;
+    overflow: auto;
+}
+
+.status-filter ul {
     padding: 5px;
 }
 
-.matches-filter li {
+.status-filter li {
     display: inline;
     padding: 0 25px
 }
 
-.matches-filter li label {
+.status-filter li label {
     text-decoration: none;
     font-size: 20px;
     font-weight: bold;
+}
+
+.day-filter {
+    /* display: flex; */
+    align-items: center;
+    box-sizing: border-box;
+    width: 20%;
+
+    justify-content: center;
+}
+
+.calendar {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+
+    border: #292930 1px solid;
+    margin: 2px;
+    padding: 1px 5px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.calendar-wrapper {
+    display: flex;
+    align-items: center;
+    width: 30%;
+
+    justify-content: center;
+}
+
+.day-wrapper {
+    display: flex;
+    align-items: center;
+    width: 70%;
+
+    justify-content: center;
 }

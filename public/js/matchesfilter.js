@@ -3,13 +3,40 @@ const MatchesFilter = {
         let mainDiv = document.createElement('div');
         mainDiv.className = 'matches-filter';
 
+        mainDiv.appendChild(this.statusFilter());
+        mainDiv.appendChild(this.dayFilter());
+
+        return mainDiv;
+    },
+
+    statusFilter() {
+        let statusFilterDiv = document.createElement('div');
+        statusFilterDiv.className = 'status-filter';
+
         let filtersUl = document.createElement('ul');
         filtersUl.appendChild(this.checkboxFilter('Scheduled', 'NOT_STARTED'));
         filtersUl.appendChild(this.checkboxFilter('Live', 'INPLAY'));
         filtersUl.appendChild(this.checkboxFilter('Finished', 'FINISHED'));
 
-        mainDiv.appendChild(filtersUl);
-        return mainDiv;
+        statusFilterDiv.appendChild(filtersUl);
+        return statusFilterDiv;
+    },
+
+    // TODO: change day dynamically
+    dayFilter() {
+        let dayFilterDiv = document.createElement('div');
+        dayFilterDiv.className = 'day-filter';
+
+        dayFilterDiv.innerHTML = `
+            <div class="calendar">
+                <div class="calendar-wrapper">
+                    <img src="./images/calendar.png">
+                </div>
+                <div class="day-wrapper">Day 18</div>
+            </div>
+        `
+
+        return dayFilterDiv;
     },
 
     checkboxFilter(name, status) {
