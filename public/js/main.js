@@ -1,5 +1,7 @@
 
 function startup() {
+    Time.start();
+    
     render();
     initialize();
 
@@ -7,7 +9,7 @@ function startup() {
 }
 
 function render() {
-    Render.matches();
+    Render.matches(Time.day() | 1);
     Render.standings();
 }
 

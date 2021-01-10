@@ -55,6 +55,10 @@
     padding: 5px;
 }
 
+.today {
+    color: #3eb650;
+}
+
 .day:hover {
     color: #3eb650;
 }

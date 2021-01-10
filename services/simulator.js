@@ -4,7 +4,7 @@ var resultController = require('../controllers/resultController');
 var utils = require('./utils');
 var random = require('./random');
 
-var day = 1, hour = 14, minute = 55;
+var day = 6, hour = 14, minute = 55;
 var interval;
 
 function logTime() {
@@ -15,9 +15,10 @@ function updateDay() {
     if (hour == 24) {
         day++;
         hour = 14;
+        minute = 55;
     }
 
-    if (day == 2) {
+    if (day == 61) {
         clearInterval(interval);
     }
 }
@@ -87,4 +88,14 @@ exports.start = function() {
     interval = setInterval(go, 1000);
 }
 
-exports.day = day;
+exports.getDay = function() {
+    return day;
+}
+
+exports.getHour = function() {
+    return hour;
+}
+
+exports.getMinute = function() {
+    return minute;
+}

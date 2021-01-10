@@ -68,7 +68,7 @@ exports.getByDayAndStatuses = function(day, statuses, populate, callback) {
 };
 
 exports.getLiveMatches = function(callback) {
-    let today = simulator.day;
+    let today = simulator.getDay();
     
     Match.find(
         { 

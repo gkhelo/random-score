@@ -1,10 +1,10 @@
 const MatchesFilter = {
-    create() {
+    create(day) {
         let mainDiv = document.createElement('div');
         mainDiv.className = 'matches-filter';
 
         mainDiv.appendChild(this.statusFilter());
-        mainDiv.appendChild(this.dayFilter());
+        mainDiv.appendChild(this.dayFilter(day));
 
         return mainDiv;
     },
@@ -22,13 +22,12 @@ const MatchesFilter = {
         return statusFilterDiv;
     },
 
-    // TODO: change day dynamically
-    dayFilter() {
+    dayFilter(day) {
         let dayFilterDiv = document.createElement('div');
         dayFilterDiv.className = 'day-filter';
 
-        dayFilterDiv.appendChild(this.calendar());
-        dayFilterDiv.appendChild(this.expandedCalendar());
+        dayFilterDiv.appendChild(this.calendar(day));
+        dayFilterDiv.appendChild(this.expandedCalendar(day));
 
         return dayFilterDiv;
     },
@@ -53,8 +52,9 @@ const MatchesFilter = {
     },
 
     filterMatches(statuses) {
-        json = JSON.stringify(statuses);
-        fetch('/api/matches/filter/1/' + json)
+        let json = JSON.stringify(statuses);
+        let selectedDay = this.getSelectedDay();
+        fetch('/api/matches/filter/' + selectedDay + '/' + json)
             .then(response => response.json())
             .then(matches => {
                 Match.hideAll();
@@ -81,7 +81,7 @@ const MatchesFilter = {
         return statuses;
     },
 
-    calendar() {
+    calendar(day) {
         let calendarDiv = document.createElement('div');
         calendarDiv.className = 'calendar';
 
@@ -89,7 +89,7 @@ const MatchesFilter = {
             <div class="calendar-wrapper">
                 <img src="./images/calendar.png">
             </div>
-            <div class="selected-day" id="selected-day">Day 18</div>
+            <div class="selected-day" id="selected-day">Day ${day}</div>
         `;
 
         calendarDiv.addEventListener('click', () => {
@@ -105,7 +105,7 @@ const MatchesFilter = {
         return calendarDiv;
     },
 
-    expandedCalendar() {
+    expandedCalendar(today) {
         let expandedCalendarDiv = document.createElement('div');
         expandedCalendarDiv.className = 'expanded-calendar';
         expandedCalendarDiv.id = 'expanded-calendar';
@@ -117,11 +117,31 @@ const MatchesFilter = {
             let dayLi = document.createElement('li');
             dayLi.className = 'day';
             dayLi.innerHTML = 'Day ' + day;
+            dayLi.addEventListener('click', () => {
+                this.updateSelectedDay(day);
+                
+                document.getElementById('expanded-calendar').style.display = 'none';
+                
+                Render.matches(day);
+            });
+
+            if (day == today) {
+                dayLi.classList.add('today');
+            }
 
             daysUl.appendChild(dayLi);
         }
 
         expandedCalendarDiv.appendChild(daysUl);
         return expandedCalendarDiv;
+    },
+
+    getSelectedDay() {
+        let dayText = document.getElementById('selected-day').innerHTML;
+        return parseInt(dayText.substring(4));
+    },
+
+    updateSelectedDay(day) {
+        document.getElementById('selected-day').innerHTML = 'Day ' + day;
     }
 }

@@ -23,6 +23,7 @@ simulator.start();
 app.use(express.static(path.join(__dirname, 'public')));
 
 // API Routes
+app.use('/api/time', require('./routes/time'));
 app.use('/api/matches', require('./routes/matches'));
 app.use('/api/standings', require('./routes/standings'));
 

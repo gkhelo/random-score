@@ -1,11 +1,12 @@
 const Render = {
-    matches() {
-        fetch('/api/matches/filter/1')
+    matches(day) {
+        fetch('/api/matches/filter/' + day)
             .then(response => response.json())
             .then(allLeagueMatches => {
                 let mainDiv = document.getElementById('matches');
+                mainDiv.innerHTML = '';
 
-                mainDiv.appendChild(MatchesFilter.create());
+                mainDiv.appendChild(MatchesFilter.create(day));
                 allLeagueMatches.forEach(leagueMatches => {
                     mainDiv.appendChild(Match.create(leagueMatches));
                 });

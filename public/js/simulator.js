@@ -1,21 +1,23 @@
 const Simulator = {
     fetchLiveMatches() {
-        fetch('/api/matches/live')
-            .then(response => response.json())
-            .then(liveMatches => {
-                let checkedStatuses = MatchesFilter.getCheckedStatuses();
-                
-                liveMatches.forEach(match => {
-                    if (checkedStatuses.includes(match.status)) {
-                        Match.update(match);
-                    } else {
-                        Match.hide(match);
-                    }
+        if (MatchesFilter.getSelectedDay() == Time.day()) {
+            fetch('/api/matches/live')
+                .then(response => response.json())
+                .then(liveMatches => {
+                    let checkedStatuses = MatchesFilter.getCheckedStatuses();
+                    
+                    liveMatches.forEach(match => {
+                        if (checkedStatuses.includes(match.status)) {
+                            Match.update(match);
+                        } else {
+                            Match.hide(match);
+                        }
+                    });
+                })
+                .catch(error => {
+                    console.log('Error occured during rendering matches:', error);
                 });
-            })
-            .catch(error => {
-                console.log('Error occured during rendering matches:', error);
-            });
+        }
     },
 
     fetchStandings() {
