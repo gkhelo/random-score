@@ -126,6 +126,12 @@ const Match = {
         img.className = 'team-logo';
         img.id = team._id;
 
+        img.addEventListener('click', () => {
+            Team.fetchTeamInfo(img.id, info => {
+                Popup.show('Team Info', TeamPopup.content(info));
+            });
+        });
+
         logoWrapper.appendChild(img);
         return logoWrapper;
     },

@@ -18,12 +18,12 @@ function initialize() {
 }
 
 function initializeMenuButtons() {
-    initializeMenuButton('search-menu', new SearchBarPopup());
-    initializeMenuButton('best-teams-menu', new TeamsPopup());
-    initializeMenuButton('best-leagues-menu', new TournamentsPopup());
+    initializeMenuButton('search-menu', 'Search Bar', SearchBarPopup.content());
+    initializeMenuButton('best-teams-menu', 'Best Teams', BestTeamsPopup.content());
+    initializeMenuButton('best-leagues-menu', 'Best Leagues', BestLeaguesPopup.content());
 }
 
-function initializeMenuButton(menuId, popup) {
+function initializeMenuButton(menuId, title, content) {
     let button = document.getElementById(menuId).children[0];
-    button.addEventListener('click', () => popup.show());
+    button.addEventListener('click', () => Popup.show(title, content));
 }

@@ -67,6 +67,30 @@ exports.getByDayAndStatuses = function(day, statuses, populate, callback) {
     });
 };
 
+exports.getByTeamId = function(teamId, callback) {
+    let query = Match.find(
+        { 
+            $or: [
+                {
+                    homeTeam: teamId
+                },
+                {
+                    guestTeam: teamId
+                }
+            ]
+        }
+    );
+    
+    query.exec(function(err, matches) {
+        if (err) {
+            console.log('Error occurred during fetching matches data from db', err);
+            callback([]);
+        }
+
+        callback(matches);
+    });
+}
+
 exports.getLiveMatches = function(callback) {
     let today = simulator.getDay();
     
