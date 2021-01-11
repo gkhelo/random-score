@@ -1,15 +1,15 @@
 
 function startup() {
-    Time.start();
-    
-    render();
-    initialize();
+    Time.start(() => {
+        render();
+        initialize();
 
-    Simulator.start();
+        Simulator.start();
+    });
 }
 
 function render() {
-    Render.matches(Time.day() | 1);
+    Render.matches(Time.day() || 1);
     Render.standings();
 }
 

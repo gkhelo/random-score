@@ -1,20 +1,25 @@
 var day = 1, hour, minute;
 
 const Time = {
-    fetchTime() {
+    fetchTime(cb) {
         fetch('/api/time')
             .then(response => response.json())
             .then(time => {
                 day = time.day;
                 hour = time.hour;
                 minute = time.minute;
+
+                if (cb != null) {
+                    cb();
+                }
             })
             .catch(error => {
                 console.log('Error occured during fetching time:', error);
             });
     },
 
-    start() {
+    start(cb) {
+        this.fetchTime(cb);
         setInterval(this.fetchTime, 1000);
     },
 
