@@ -1,6 +1,6 @@
 const Team = {
-    fetchTeamInfo(teamId, cb) {
-        fetch('/api/team/' + teamId)
+    fetchTeamInfo(id, cb) {
+        fetch('/api/team/' + id)
             .then(response => response.json())
             .then(cb)
             .catch(error => {

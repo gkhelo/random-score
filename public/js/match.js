@@ -170,5 +170,15 @@ const Match = {
         Array.prototype.forEach.call(matchDivs, matchDiv => {
             matchDiv.style.display = 'none';
         })
+    },
+
+    filter(matches, status) {
+        let result = [];
+        matches.forEach(match => {
+            if (match.status == status) {
+                result.push(match);
+            }
+        });
+        return result;
     }
 }

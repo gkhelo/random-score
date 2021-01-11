@@ -75,11 +75,62 @@ const TeamPopup = {
                 <p style="padding-left: 15px">Error occurred during fetching team info</p>
             `;
         } else {
+            content.className = 'team-info';
             content.innerHTML = `
-                <p style="padding-left: 15px">${info.team.name}</p>
+                <div class="team-info-logo">
+                    <img src="${info.team.logo}" />
+                </div>
+                <div class="team-info-name">${info.team.name}</div>
             `;
+
+            content.appendChild(this.tabs(info));
         }
 
         return content;
+    },
+
+    tabs(info) {
+        let tabsDiv = document.createElement('div');
+        tabsDiv.className = 'team-info-tabs';
+
+        tabsDiv.appendChild(this.tab('Results', Match.filter(info.matches, 'FINISHED'), true));
+        tabsDiv.appendChild(this.tab('Fixtures', Match.filter(info.matches, 'NOT_STARTED'), false));
+        tabsDiv.appendChild(this.tab('Standings', 'NOT FETCHED YET', false));
+
+        return tabsDiv;
+    },
+
+    tab(name, content, selected) {
+        let tabDiv = document.createElement('div');
+        tabDiv.className = 'team-info-tab';
+        tabDiv.innerHTML = name;
+
+        if (selected) {
+            this.selectTab(tabDiv, content);
+        }
+        tabDiv.addEventListener('click', () => {
+            this.deselectTab();
+            this.selectTab(tabDiv, content);
+        });
+
+        return tabDiv;
+    },
+
+    selectTab(tabDiv, content) {
+        tabDiv.classList.add('team-info-tab-selected');
+        this.showTabContent(content);
+    },
+
+    deselectTab() {
+        let tabs = document.getElementsByClassName('team-info-tab');
+        
+        Array.prototype.forEach.call(tabs, tab => {
+            tab.classList.remove('team-info-tab-selected');
+        })
+    },
+
+    // TODO: implement this
+    showTabContent(content) {
+        console.log(content);
     }
 }

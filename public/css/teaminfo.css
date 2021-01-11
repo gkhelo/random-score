@@ -1,0 +1,50 @@
+.team-info {
+    display: flex;
+    flex-direction: column;
+    
+    align-items: center;
+}
+
+.team-info-logo {
+    margin: 10px;
+    text-align: center;
+
+    max-width: 100px;
+    max-height: 100px;
+}
+
+.team-info-logo img {
+    cursor: default;
+}
+
+.team-info-name {
+    margin-bottom: 10px;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.team-info-tabs {
+    display: flex;
+    flex-direction: row;
+    border-bottom: #3eb650 2px solid;
+}
+
+.team-info-tab {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+
+    padding: 0 20px;
+    font-size: 20px;
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+.team-info-tab:hover {
+    background: #d4d4d4;
+}
+
+.team-info-tab-selected, .team-info-tab-selected:hover{
+    background: #3eb650;
+}
