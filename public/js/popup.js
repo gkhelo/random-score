@@ -1,6 +1,11 @@
 const Popup = {
     show(title, content) {
-        let wrapper = document.createElement('div');
+        let wrapper = document.getElementById('popup-wrapper');
+        if (wrapper != null) {
+            document.body.removeChild(wrapper);
+        }
+
+        wrapper = document.createElement('div');
         wrapper.id = 'popup-wrapper';
 
         let popup = document.createElement('div');
@@ -76,6 +81,8 @@ const TeamPopup = {
             `;
         } else {
             content.className = 'team-info';
+            content.id = 'team-info';
+
             content.innerHTML = `
                 <div class="team-info-logo">
                     <img src="${info.team.logo}" />
@@ -84,6 +91,7 @@ const TeamPopup = {
             `;
 
             content.appendChild(this.tabs(info));
+            content.appendChild(this.defaultTabContent(info));
         }
 
         return content;
@@ -93,32 +101,37 @@ const TeamPopup = {
         let tabsDiv = document.createElement('div');
         tabsDiv.className = 'team-info-tabs';
 
-        tabsDiv.appendChild(this.tab('Results', Match.filter(info.matches, 'FINISHED'), true));
-        tabsDiv.appendChild(this.tab('Fixtures', Match.filter(info.matches, 'NOT_STARTED'), false));
-        tabsDiv.appendChild(this.tab('Standings', 'NOT FETCHED YET', false));
+        tabsDiv.appendChild(this.tab('Results', 
+            this.matchesContent(Match.filter(info.matches, 'FINISHED')), true));
+
+        tabsDiv.appendChild(this.tab('Fixtures', 
+            this.matchesContent(Match.filter(info.matches, 'NOT_STARTED')), false));
+
+        tabsDiv.appendChild(this.tab('Standings', 
+            this.standingsContent(info.standings, info.team._id), false));
 
         return tabsDiv;
     },
 
-    tab(name, content, selected) {
+    tab(name, content, defaultTab) {
         let tabDiv = document.createElement('div');
         tabDiv.className = 'team-info-tab';
         tabDiv.innerHTML = name;
 
-        if (selected) {
+        if (defaultTab) {
             this.selectTab(tabDiv, content);
         }
         tabDiv.addEventListener('click', () => {
             this.deselectTab();
             this.selectTab(tabDiv, content);
+            this.updateTabContent(content);
         });
 
         return tabDiv;
     },
 
-    selectTab(tabDiv, content) {
+    selectTab(tabDiv) {
         tabDiv.classList.add('team-info-tab-selected');
-        this.showTabContent(content);
     },
 
     deselectTab() {
@@ -129,8 +142,39 @@ const TeamPopup = {
         })
     },
 
-    // TODO: implement this
-    showTabContent(content) {
-        console.log(content);
+    defaultTabContent(info) {
+        let contentDiv = document.createElement('div');
+        contentDiv.className = 'team-info-content';
+        contentDiv.id = 'team-info-content';
+
+        // default content is FINISHED matches
+        contentDiv.appendChild(this.matchesContent(Match.filter(info.matches, 'FINISHED')));
+
+        return contentDiv;
+    },
+
+    updateTabContent(content) {
+        let contentDiv = document.getElementById('team-info-content');
+        contentDiv.innerHTML = '';
+
+        contentDiv.appendChild(content);
+    },
+
+    matchesContent(matches) {
+        let matchesDiv = document.createElement('div');
+
+        matches.forEach(match => {
+            matchesDiv.appendChild(Match.createSingleMatch(match));
+        });
+
+        return matchesDiv;
+    },
+
+    standingsContent(standings, teamId) {
+        let standingsDiv = document.createElement('div');
+
+        standingsDiv.appendChild(Standings.createTable(standings, 'block', teamId));
+
+        return standingsDiv;
     }
 }

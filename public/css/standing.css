@@ -59,6 +59,10 @@
     color: red;
 }
 
+.league-table-selected {
+    background-color: #ff7b21;
+}
+
 /* .tournament-table-top td {
 	color: #77ff21;
 }

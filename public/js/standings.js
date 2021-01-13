@@ -10,7 +10,7 @@ const Standings = {
             let singleLeagueDiv = document.createElement('div');
             singleLeagueDiv.className = 'single-league';
 
-            let table = this.createTable(leagueStanding);
+            let table = this.createTable(leagueStanding, 'none', -1);
 
             singleLeagueDiv.appendChild(this.createButton(leagueStanding.name, table));
             singleLeagueDiv.appendChild(table);
@@ -49,15 +49,15 @@ const Standings = {
         return btn;
     },
 
-    createTable(leagueStanding) {
+    createTable(leagueStanding, display, selectedTeamId) {
         let tableDiv = document.createElement('div');
         tableDiv.className = 'league-table';
-        tableDiv.style.display = 'none';
+        tableDiv.style.display = display;
 
         let table = document.createElement('table');
 
         table.appendChild(this.createTableHeader());
-        table.appendChild(this.createTableContent(leagueStanding));
+        table.appendChild(this.createTableContent(leagueStanding, selectedTeamId));
 
         tableDiv.appendChild(table);
         return tableDiv;
@@ -80,29 +80,33 @@ const Standings = {
         return tr;
     },
 
-    createTableContent(leagueStanding) {
+    createTableContent(leagueStanding, selectedTeamId) {
         let contentDiv = document.createElement('div');
         contentDiv.style.display = 'contents';
         contentDiv.id = leagueStanding.id;
 
-        this.addResults(contentDiv, leagueStanding);
+        this.addResults(contentDiv, leagueStanding, selectedTeamId);
 
         return contentDiv;
     },
 
-    addResults(contentDiv, leagueStanding) {
+    addResults(contentDiv, leagueStanding, selectedTeamId) {
         let position = 0;
         leagueStanding.standings.forEach(result => {
             position++;
             contentDiv.appendChild(this.createResult(
                 result, position, 
-                this.getClassName(position, leagueStanding.promotions, leagueStanding.relegations, leagueStanding.standings.length)));
+                this.getClassName(position, leagueStanding.promotions, leagueStanding.relegations, leagueStanding.standings.length),
+                selectedTeamId));
         });
     },
 
-    createResult(result, position, className) {
+    createResult(result, position, className, selectedTeamId) {
         let tr = document.createElement('tr');
         tr.className = className;
+        if (selectedTeamId == result.team._id) {
+            tr.classList.add('league-table-selected');
+        }
         tr.innerHTML = `
             <td>${position}</td>
             <td>${result.team.name}</td>

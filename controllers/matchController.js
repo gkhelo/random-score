@@ -80,6 +80,9 @@ exports.getByTeamId = function(teamId, callback) {
             ]
         }
     );
+
+    query.populate('homeTeam', ['_id', 'name', 'logo'])
+        .populate('guestTeam', ['_id', 'name', 'logo'])
     
     query.exec(function(err, matches) {
         if (err) {

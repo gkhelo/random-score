@@ -48,3 +48,8 @@
 .team-info-tab-selected, .team-info-tab-selected:hover{
     background: #3eb650;
 }
+
+.team-info-content {
+    margin-top: 15px;
+    width: 100%;
+}

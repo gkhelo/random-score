@@ -10,7 +10,9 @@ exports.init = function() {
 }
 
 exports.getById = function(id, callback) {
-    Team.findOne({ _id: id }).exec((err, team) => {
+    Team.findOne({ _id: id })
+        .populate('league', ['_id', 'name', 'promotions', 'relegations'])
+        .exec((err, team) => {
         if (err) {
             console.log('Error occurred during fetching teams data from db', err);
             callback(null);
