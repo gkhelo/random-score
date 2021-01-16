@@ -9,6 +9,7 @@ const Time = {
                 hour = time.hour;
                 minute = time.minute;
 
+                Time.update();
                 if (cb != null) {
                     cb();
                 }
@@ -37,9 +38,13 @@ const Time = {
 
     time() {
         if (minute > 9) {
-            return 'Day ' + day + ' ' + hour + ':' + minute;
+            return 'Day ' + day + ' - ' + hour + ':' + minute;
         } else {
-            return 'Day ' + day + ' ' + hour + ':0' + minute;
+            return 'Day ' + day + ' - ' + hour + ':0' + minute;
         }
+    },
+
+    update() {
+        document.getElementById('system-time').innerHTML = Time.time();
     }
 }

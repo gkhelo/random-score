@@ -103,4 +103,40 @@ main {
     grid-column: 2;
 }
 
+/* footer */
+footer {
+    background-color: #292930;
+    color: #ffffff;
+    margin-top: 30px;
+    min-height: 50px;
+
+    padding: 20px
+}
+
+.site-info a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 1em;
+}
+
+.site-title, .system-time-title {
+    font-weight: bold;
+    font-size: 24px;
+}
+
+.system-time-title {
+    color: #3eb650;
+    border-bottom: #3eb650 1px solid;
+}
+
+.site-title {
+    color: #fcc133;
+    border-bottom: #fcc133 1px solid;
+}
+
 /* good color combinations for this website:  292930, 3eb650, fcc133, e12b38 */
