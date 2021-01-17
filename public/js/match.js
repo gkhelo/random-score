@@ -33,7 +33,7 @@ const Match = {
         let homeTeamDiv = this.createTeam(match.homeTeam, isHomeWinner);
 
         let homeLogoDiv = this.createLogo(match.homeTeam);
-        let scoreDiv = this.createScore(match.homeScore, match.guestScore, match.status);
+        let scoreDiv = this.createScore(match._id, match.homeScore, match.guestScore, match.status);
         let guestLogoDiv = this.createLogo(match.guestTeam);
 
         let isGuestWinner = false;
@@ -136,9 +136,17 @@ const Match = {
         return logoWrapper;
     },
 
-    createScore(homeScore, guestScore, status) {
+    createScore(matchId, homeScore, guestScore, status) {
         let scoreDiv = document.createElement('div');
         scoreDiv.className = 'match-score';
+        scoreDiv.addEventListener('click', () => {
+            if (status == 'NOT_STARTED') {
+                Match.fetchPreview(matchId, info => {
+                    console.log(info);
+                    // Popup.show('Match Info', MatchPopup.content(info));
+                })
+            }
+        });
 
         if (status == 'NOT_STARTED') {
             scoreDiv.innerText = 'Preview';
@@ -180,5 +188,14 @@ const Match = {
             }
         });
         return result;
+    },
+
+    fetchPreview(matchId, callback) {
+        fetch('/api/matches/preview/' + matchId)
+            .then(response => response.json())
+            .then(callback)
+            .catch(error => {
+                console.log('Error occured during fetching match preview:', error);
+            });
     }
 }

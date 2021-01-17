@@ -10,6 +10,15 @@ exports.init = function() {
         });
 }
 
+exports.getById = function(id) {
+    let query = Match.findOne({ _id: id });
+
+    query.populate('homeTeam', ['_id', 'name', 'logo'])
+        .populate('guestTeam', ['_id', 'name', 'logo']);
+
+    return query.exec();
+}
+
 exports.getByDay = function(day, populate, callback) {
     let query = Match.find({ day: day });
 
@@ -112,6 +121,28 @@ exports.getLiveMatches = function(callback) {
 
             callback(matches);
         });
+}
+
+exports.getTeamLastMatches = function(teamId, numMatches) {
+    let query = Match.find(
+        { 
+            status: 'FINISHED',
+            $or: [
+                {
+                    homeTeam: teamId
+                },
+                {
+                    guestTeam: teamId
+                }
+            ]
+        })
+        .sort({ day: 'desc' })
+        .limit(numMatches);
+
+    query.populate('homeTeam', ['_id', 'name', 'logo'])
+        .populate('guestTeam', ['_id', 'name', 'logo'])
+
+    return query.exec();
 }
 
 exports.startMatches = function(day, time) {

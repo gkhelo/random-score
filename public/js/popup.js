@@ -178,3 +178,11 @@ const TeamPopup = {
         return standingsDiv;
     }
 }
+
+const MatchPopup = {
+    content(info) {
+        let content = document.createElement('div');
+        content.innerHTML = `<p style="padding-left: 15px">${info}</p>`;
+        return content;
+    }
+}

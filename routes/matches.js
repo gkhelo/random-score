@@ -26,4 +26,24 @@ router.get('/live', (req, res) => {
     });
 });
 
+router.get('/preview/:id', (req, res) => {
+    matchController.getById(req.params.id)
+        .then(match => {
+            let homePromise = matchController.getTeamLastMatches(match.homeTeam, 3);
+            let guestPromise = matchController.getTeamLastMatches(match.guestTeam, 3);
+
+            return Promise.all([match, homePromise, guestPromise]);
+        })
+        .then(info => {
+            res.send(JSON.stringify({
+                match: info[0],
+                homeMatches: info[1],
+                guestMatches: info[2]
+            }));
+        })
+        .catch(err => {
+            console.log('Error occurred while getting match preview details:', err);
+        });
+})
+
 module.exports = router;
