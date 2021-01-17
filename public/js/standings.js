@@ -10,7 +10,7 @@ const Standings = {
             let singleLeagueDiv = document.createElement('div');
             singleLeagueDiv.className = 'single-league';
 
-            let table = this.createTable(leagueStanding, 'none', -1);
+            let table = this.createTable(leagueStanding, 'none', [-1]);
 
             singleLeagueDiv.appendChild(this.createButton(leagueStanding.name, table));
             singleLeagueDiv.appendChild(table);
@@ -49,7 +49,7 @@ const Standings = {
         return btn;
     },
 
-    createTable(leagueStanding, display, selectedTeamId) {
+    createTable(leagueStanding, display, selectedTeamIds) {
         let tableDiv = document.createElement('div');
         tableDiv.className = 'league-table';
         tableDiv.style.display = display;
@@ -57,7 +57,7 @@ const Standings = {
         let table = document.createElement('table');
 
         table.appendChild(this.createTableHeader());
-        table.appendChild(this.createTableContent(leagueStanding, selectedTeamId));
+        table.appendChild(this.createTableContent(leagueStanding, selectedTeamIds));
 
         tableDiv.appendChild(table);
         return tableDiv;
@@ -80,31 +80,31 @@ const Standings = {
         return tr;
     },
 
-    createTableContent(leagueStanding, selectedTeamId) {
+    createTableContent(leagueStanding, selectedTeamIds) {
         let contentDiv = document.createElement('div');
         contentDiv.style.display = 'contents';
         contentDiv.id = leagueStanding.id;
 
-        this.addResults(contentDiv, leagueStanding, selectedTeamId);
+        this.addResults(contentDiv, leagueStanding, selectedTeamIds);
 
         return contentDiv;
     },
 
-    addResults(contentDiv, leagueStanding, selectedTeamId) {
+    addResults(contentDiv, leagueStanding, selectedTeamIds) {
         let position = 0;
         leagueStanding.standings.forEach(result => {
             position++;
             contentDiv.appendChild(this.createResult(
                 result, position, 
                 this.getClassName(position, leagueStanding.promotions, leagueStanding.relegations, leagueStanding.standings.length),
-                selectedTeamId));
+                selectedTeamIds));
         });
     },
 
-    createResult(result, position, className, selectedTeamId) {
+    createResult(result, position, className, selectedTeamIds) {
         let tr = document.createElement('tr');
         tr.className = className;
-        if (selectedTeamId == result.team._id) {
+        if (selectedTeamIds.includes(result.team._id)) {
             tr.classList.add('league-table-selected');
         }
         tr.innerHTML = `

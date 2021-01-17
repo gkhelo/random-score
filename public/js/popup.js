@@ -173,16 +173,131 @@ const TeamPopup = {
     standingsContent(standings, teamId) {
         let standingsDiv = document.createElement('div');
 
-        standingsDiv.appendChild(Standings.createTable(standings, 'block', teamId));
+        standingsDiv.appendChild(Standings.createTable(standings, 'block', [teamId]));
 
         return standingsDiv;
     }
 }
 
-const MatchPopup = {
+const MatchPreviewPopup = {
     content(info) {
         let content = document.createElement('div');
-        content.innerHTML = `<p style="padding-left: 15px">${info}</p>`;
+        if (info.status != 'ok') {
+            content.innerHTML = `
+                <p style="padding-left: 15px">Error occurred during fetching match preview</p>
+            `;
+        } else {
+            console.log(info);
+            content.className = 'team-info';
+            content.id = 'team-info';
+
+            content.innerHTML = `
+                <div class="match-details">
+                    <div class="main-match">
+                        <div class="team-logo-wrapper">
+                            <img src="${info.match.homeTeam.logo}" class="team-logo" id="${info.match.homeTeam.id}">
+                        </div>
+                        <div class="match-status">${info.match.time}</div>
+                        <div class="team-logo-wrapper">
+                            <img src="${info.match.guestTeam.logo}" class="team-logo" id="${info.match.guestTeam.id}">
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            content.appendChild(this.tabs(info));
+            content.appendChild(this.defaultTabContent(info));
+        }
+
         return content;
+    },
+
+    tabs(info) {
+        let tabsDiv = document.createElement('div');
+        tabsDiv.className = 'team-info-tabs';
+
+        tabsDiv.appendChild(this.tab('Results',
+            this.matchesContent(info.homeMatches, info.guestMatches), true));
+
+        tabsDiv.appendChild(this.tab('Standings', 
+            this.standingsContent(info.standings, info.match.homeTeam._id, info.match.guestTeam._id), false));
+
+        return tabsDiv;
+    },
+
+    tab(name, content, defaultTab) {
+        let tabDiv = document.createElement('div');
+        tabDiv.className = 'team-info-tab';
+        tabDiv.innerHTML = name;
+
+        if (defaultTab) {
+            this.selectTab(tabDiv, content);
+        }
+        tabDiv.addEventListener('click', () => {
+            this.deselectTab();
+            this.selectTab(tabDiv, content);
+            this.updateTabContent(content);
+        });
+
+        return tabDiv;
+    },
+
+    selectTab(tabDiv) {
+        tabDiv.classList.add('team-info-tab-selected');
+    },
+
+    deselectTab() {
+        let tabs = document.getElementsByClassName('team-info-tab');
+        
+        Array.prototype.forEach.call(tabs, tab => {
+            tab.classList.remove('team-info-tab-selected');
+        })
+    },
+
+    defaultTabContent(info) {
+        let contentDiv = document.createElement('div');
+        contentDiv.className = 'team-info-content';
+        contentDiv.id = 'team-info-content';
+
+        // default content is FINISHED matches
+        contentDiv.appendChild(this.matchesContent(info.homeMatches, info.guestMatches));
+
+        return contentDiv;
+    },
+
+    updateTabContent(content) {
+        let contentDiv = document.getElementById('team-info-content');
+        contentDiv.innerHTML = '';
+
+        contentDiv.appendChild(content);
+    },
+
+    matchesContent(homeMatches, guestMatches) {
+        let matchesDiv = document.createElement('div');
+        matchesDiv.className = 'double-matches';
+
+        let homeMatchesDiv = document.createElement('div');
+        homeMatches.forEach(match => {
+            homeMatchesDiv.appendChild(Match.createMiniSingleMatch(match));
+        });
+
+        let guestMatchesDiv = document.createElement('div');
+        guestMatches.forEach(match => {
+            guestMatchesDiv.appendChild(Match.createMiniSingleMatch(match));
+        });
+
+        matchesDiv.appendChild(homeMatchesDiv);
+        matchesDiv.appendChild(guestMatchesDiv);
+
+        return matchesDiv;
+    },
+
+    standingsContent(standings, homeTeamId, guestTeamId) {
+        let standingsDiv = document.createElement('div');
+
+        standingsDiv.appendChild(
+            Standings.createTable(standings, 'block', [homeTeamId, guestTeamId]));
+
+        return standingsDiv;
     }
 }

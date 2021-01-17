@@ -13,8 +13,8 @@ exports.init = function() {
 exports.getById = function(id) {
     let query = Match.findOne({ _id: id });
 
-    query.populate('homeTeam', ['_id', 'name', 'logo'])
-        .populate('guestTeam', ['_id', 'name', 'logo']);
+    query.populate('homeTeam', ['_id', 'name', 'logo', 'code'])
+        .populate('guestTeam', ['_id', 'name', 'logo', 'code']);
 
     return query.exec();
 }
@@ -139,8 +139,8 @@ exports.getTeamLastMatches = function(teamId, numMatches) {
         .sort({ day: 'desc' })
         .limit(numMatches);
 
-    query.populate('homeTeam', ['_id', 'name', 'logo'])
-        .populate('guestTeam', ['_id', 'name', 'logo'])
+    query.populate('homeTeam', ['_id', 'name', 'logo', 'code'])
+        .populate('guestTeam', ['_id', 'name', 'logo', 'code'])
 
     return query.exec();
 }

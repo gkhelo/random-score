@@ -1,6 +1,7 @@
 var express = require('express');
 
 var matchController = require('../controllers/matchController');
+var resultController = require('../controllers/resultController');
 
 var utils = require('../services/utils');
 
@@ -31,18 +32,32 @@ router.get('/preview/:id', (req, res) => {
         .then(match => {
             let homePromise = matchController.getTeamLastMatches(match.homeTeam, 3);
             let guestPromise = matchController.getTeamLastMatches(match.guestTeam, 3);
+            let standingsPromise = resultController.get(match.league);
 
-            return Promise.all([match, homePromise, guestPromise]);
+            return Promise.all([match, homePromise, guestPromise, standingsPromise]);
         })
         .then(info => {
+            let match = info[0];
             res.send(JSON.stringify({
-                match: info[0],
+                status: 'ok',
+                
+                match: match,
                 homeMatches: info[1],
-                guestMatches: info[2]
+                guestMatches: info[2],
+                standings: {
+                    id: match.league._id,
+                    name: match.league.name,
+                    promotions: match.league.promotions,
+                    relegations: match.league.relegations,
+                    standings: utils.sortStandings(info[3])
+                }
             }));
         })
         .catch(err => {
             console.log('Error occurred while getting match preview details:', err);
+            res.send(JSON.stringify({
+                status: 'error'
+            }));
         });
 })
 

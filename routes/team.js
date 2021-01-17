@@ -16,7 +16,7 @@ router.get('/:id', (req, res) => {
             }));
         } else {
             matchController.getByTeamId(req.params.id, (matches) => {
-                resultController.get(team.league._id, standings => {
+                resultController.get(team.league._id).then(standings => {
                     res.send(JSON.stringify({
                         status: 'ok',
         

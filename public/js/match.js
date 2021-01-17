@@ -30,7 +30,7 @@ const Match = {
         if (match.status == 'FINISHED' && match.homeScore > match.guestScore) {
             isHomeWinner = true;
         }
-        let homeTeamDiv = this.createTeam(match.homeTeam, isHomeWinner);
+        let homeTeamDiv = this.createTeam(match.homeTeam, isHomeWinner, false);
 
         let homeLogoDiv = this.createLogo(match.homeTeam);
         let scoreDiv = this.createScore(match._id, match.homeScore, match.guestScore, match.status);
@@ -40,9 +40,39 @@ const Match = {
         if (match.status == 'FINISHED' && match.homeScore < match.guestScore) {
             isGuestWinner = true;
         }
-        let guestTeamDiv = this.createTeam(match.guestTeam, isGuestWinner);
+        let guestTeamDiv = this.createTeam(match.guestTeam, isGuestWinner, false);
 
         matchDiv.appendChild(statusDiv);
+        matchDiv.appendChild(homeTeamDiv);
+        matchDiv.appendChild(homeLogoDiv);
+        matchDiv.appendChild(scoreDiv);
+        matchDiv.appendChild(guestLogoDiv);
+        matchDiv.appendChild(guestTeamDiv);
+
+        return matchDiv;
+    },
+
+    createMiniSingleMatch(match) {
+        let matchDiv = document.createElement('div');
+        matchDiv.className = 'mini-match';
+        matchDiv.id = match._id;
+
+        let isHomeWinner = false;
+        if (match.status == 'FINISHED' && match.homeScore > match.guestScore) {
+            isHomeWinner = true;
+        }
+        let homeTeamDiv = this.createTeam(match.homeTeam, isHomeWinner, true);
+        let homeLogoDiv = this.createLogo(match.homeTeam);
+
+        let scoreDiv = this.createScore(match._id, match.homeScore, match.guestScore, match.status);
+        
+        let isGuestWinner = false;
+        if (match.status == 'FINISHED' && match.homeScore < match.guestScore) {
+            isGuestWinner = true;
+        }
+        let guestTeamDiv = this.createTeam(match.guestTeam, isGuestWinner, true);
+        let guestLogoDiv = this.createLogo(match.guestTeam);
+
         matchDiv.appendChild(homeTeamDiv);
         matchDiv.appendChild(homeLogoDiv);
         matchDiv.appendChild(scoreDiv);
@@ -100,11 +130,16 @@ const Match = {
         }
     },
 
-    createTeam(team, bold) {
+    createTeam(team, bold, code) {
         let teamDiv = document.createElement('div');
         teamDiv.className = 'match-team';
         teamDiv.id = team._id;
-        teamDiv.innerText = team.name;
+
+        if (code) {
+            teamDiv.innerText = team.code;
+        } else {
+            teamDiv.innerText = team.name;
+        }
 
         if (bold) {
             this.boldTeamDiv(teamDiv);
@@ -142,8 +177,7 @@ const Match = {
         scoreDiv.addEventListener('click', () => {
             if (status == 'NOT_STARTED') {
                 Match.fetchPreview(matchId, info => {
-                    console.log(info);
-                    // Popup.show('Match Info', MatchPopup.content(info));
+                    Popup.show('Match Preview', MatchPreviewPopup.content(info));
                 })
             }
         });

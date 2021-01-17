@@ -13,7 +13,7 @@ router.get('/', (req, res) => {
         let queries = [];
         leagues.forEach(league => {
             queries.push(function(cb) {
-                resultController.get(league, standings => {
+                resultController.get(league).then(standings => {
                     cb(null,
                     {
                         id: league._id,
