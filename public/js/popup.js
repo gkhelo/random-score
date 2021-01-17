@@ -164,7 +164,7 @@ const TeamPopup = {
         let matchesDiv = document.createElement('div');
 
         matches.forEach(match => {
-            matchesDiv.appendChild(Match.createSingleMatch(match));
+            matchesDiv.appendChild(Match.createSingleMatch(match, true));
         });
 
         return matchesDiv;
@@ -187,7 +187,6 @@ const MatchPreviewPopup = {
                 <p style="padding-left: 15px">Error occurred during fetching match preview</p>
             `;
         } else {
-            console.log(info);
             content.className = 'team-info';
             content.id = 'team-info';
 

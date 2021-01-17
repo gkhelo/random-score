@@ -18,6 +18,12 @@
     border-bottom: #292930 1px solid;
 }
 
+.match > div {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+}
+
 .match-status {
     text-align: center;
     font-size: 18px;

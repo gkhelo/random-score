@@ -29,7 +29,7 @@ const Standings = {
             let contentDiv = document.getElementById(leagueStanding.id)
             contentDiv.innerHTML = '';
 
-            this.addResults(contentDiv, leagueStanding);
+            this.addResults(contentDiv, leagueStanding, [-1]);
         });
     },
 

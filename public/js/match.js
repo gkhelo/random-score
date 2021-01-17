@@ -8,7 +8,7 @@ const Match = {
 
         leagueMatches.matches.forEach(match => {
             let matchLi = document.createElement('li');
-            matchLi.appendChild(this.createSingleMatch(match));
+            matchLi.appendChild(this.createSingleMatch(match, false));
 
             matchesUl.appendChild(matchLi);
         });
@@ -19,12 +19,12 @@ const Match = {
         return leagueMatchesDiv;
     },
 
-    createSingleMatch(match) {
+    createSingleMatch(match, showDay) {
         let matchDiv = document.createElement('div');
         matchDiv.className = 'match';
         matchDiv.id = match._id;
 
-        let statusDiv = this.createStatus(match);
+        let statusDiv = this.createStatus(match, showDay);
 
         let isHomeWinner = false;
         if (match.status == 'FINISHED' && match.homeScore > match.guestScore) {
@@ -102,22 +102,30 @@ const Match = {
         }
     },
 
-    createStatus(match) {
+    createStatus(match, showDay) {
         let statusDiv = document.createElement('div');
         statusDiv.className = 'match-status';
 
-        this.updateStatus(match, statusDiv);
+        this.updateStatus(match, statusDiv, showDay);
 
         return statusDiv;
     },
 
-    updateStatus(match, statusDiv) {
+    updateStatus(match, statusDiv, showDay) {
         let status = match.status;
         if (status == 'NOT_STARTED') {
-            statusDiv.innerText = match.time;
+            if (showDay) {
+                statusDiv.innerHTML = `Day ${match.day} - ${match.time}`;
+            } else {
+                statusDiv.innerHTML = match.time;
+            }
         } else if (status == 'FINISHED') {
-            statusDiv.innerText = 'Finished';
-            statusDiv.classList.remove('match-live');
+            if (showDay) {
+                statusDiv.innerHTML = `Day ${match.day} - ${match.time}`;
+            } else {
+                statusDiv.innerText = 'Finished';
+                statusDiv.classList.remove('match-live');
+            }
         } else {
             statusDiv.innerText = match.minute;
             statusDiv.classList.add('match-live');

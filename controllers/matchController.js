@@ -13,7 +13,8 @@ exports.init = function() {
 exports.getById = function(id) {
     let query = Match.findOne({ _id: id });
 
-    query.populate('homeTeam', ['_id', 'name', 'logo', 'code'])
+    query.populate('league', ['_id', 'name', 'promotions', 'relegations'])
+        .populate('homeTeam', ['_id', 'name', 'logo', 'code'])
         .populate('guestTeam', ['_id', 'name', 'logo', 'code']);
 
     return query.exec();
@@ -92,6 +93,8 @@ exports.getByTeamId = function(teamId, callback) {
 
     query.populate('homeTeam', ['_id', 'name', 'logo'])
         .populate('guestTeam', ['_id', 'name', 'logo'])
+
+    query.sort({ day: 'asc'})
     
     query.exec(function(err, matches) {
         if (err) {
