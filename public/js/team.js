@@ -6,5 +6,12 @@ const Team = {
             .catch(error => {
                 console.log('Error occured during fetching team info:', error);
             });
+    },
+
+    updateTeamFavourite(id) {
+        fetch('/api/team/favourite/' + id, { method: 'POST'} )
+            .catch(error => {
+                console.log('Error occured during updating team favourite info:', error);
+            });
     }
 }

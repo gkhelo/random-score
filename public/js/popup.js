@@ -87,14 +87,51 @@ const TeamPopup = {
                 <div class="team-info-logo">
                     <img src="${info.team.logo}" />
                 </div>
-                <div class="team-info-name">${info.team.name}</div>
             `;
 
+            content.appendChild(this.teamName(info.team));
             content.appendChild(this.tabs(info));
             content.appendChild(this.defaultTabContent(info));
         }
 
         return content;
+    },
+
+    teamName(team) {
+        let teamNameDiv = document.createElement('div');
+        teamNameDiv.className = 'team-info-name';
+
+        teamNameDiv.innerHTML = `<div>${team.name}</div>`
+        teamNameDiv.appendChild(this.star(team));
+        
+        return teamNameDiv;
+    },
+
+    star(team) {
+        let starDiv = document.createElement('div');
+        starDiv.className = 'star-wrapper';
+
+        let img = document.createElement('img');
+        if (team.favourite) {
+            img.src = './images/star-selected.png';
+        } else {
+            img.src = './images/star.png';
+        }
+
+        img.addEventListener('click', () => {
+            if (team.favourite) {
+                img.src = './images/star.png';
+                team.favourite = false;
+            } else {
+                img.src = './images/star-selected.png';
+                team.favourite = true;
+            }
+
+            Team.updateTeamFavourite(team._id);
+        });
+
+        starDiv.appendChild(img);
+        return starDiv;
     },
 
     tabs(info) {

@@ -32,3 +32,14 @@ exports.getByLeagueId = function(leagueId, callback) {
         callback(teams);
     });
 }
+
+exports.updateFavourite = function(id) {
+    Team.findById(id, (err, res) => {
+        if (err) {
+            console.log('Error occurred during updating favourite:', err);
+        } else {
+            res.favourite = !res.favourite;
+            res.save();
+        }
+    });
+}

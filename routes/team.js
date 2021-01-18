@@ -5,6 +5,7 @@ var matchController = require('../controllers/matchController');
 var resultController = require('../controllers/resultController');
 
 var utils = require('../services/utils');
+const team = require('../models/team');
 
 var router = express.Router();
 
@@ -34,6 +35,10 @@ router.get('/:id', (req, res) => {
             });
         }
     });
+})
+
+router.post('/favourite/:id', (req, res) => {
+    teamController.updateFavourite(req.params.id);
 })
 
 module.exports = router;

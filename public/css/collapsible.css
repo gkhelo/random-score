@@ -1,9 +1,6 @@
 .collapsible {
     display: grid;
     grid-template-columns: 4fr 1fr;
-
-    background: #fcc133;
-    border-bottom: #292930 1px solid;
 }
 
 .collapsible-title {
