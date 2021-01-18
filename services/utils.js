@@ -2,12 +2,14 @@ var leagueController = require('../controllers/leagueController');
 var matchController = require('../controllers/matchController');
 var teamController = require('../controllers/teamController');
 var resultController = require('../controllers/resultController');
+var notificationController = require('../controllers/notificationController');
 
 exports.initSchemas = function() {
     leagueController.init();
     matchController.init();
     teamController.init();
     resultController.init();
+    notificationController.init();
 }
 
 exports.getTime = function(hour, minute) {

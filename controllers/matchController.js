@@ -1,5 +1,6 @@
 var Match = require('../models/match');
 var simulator = require('../services/simulator');
+var notificationController = require('./notificationController');
 
 exports.init = function() {
     Match.findOne({ status: 'init' })
@@ -20,23 +21,14 @@ exports.getById = function(id) {
     return query.exec();
 }
 
-exports.getByDay = function(day, populate, callback) {
+exports.getByDay = function(day) {
     let query = Match.find({ day: day });
 
-    if (populate) {
-        query.populate('league', 'name')
-            .populate('homeTeam', ['_id', 'name', 'logo'])
-            .populate('guestTeam', ['_id', 'name', 'logo'])
-    }
+    query.populate('league', 'name')
+        .populate('homeTeam', ['_id', 'name', 'logo'])
+        .populate('guestTeam', ['_id', 'name', 'logo']);
         
-    query.exec(function(err, matches) {
-        if (err) {
-            console.log('Error occurred during fetching matches data from db', err);
-            callback([]);
-        }
-
-        callback(matches);
-    });
+    return query.exec()
 };
 
 exports.getByStatus = function(status, callback) {
@@ -52,7 +44,7 @@ exports.getByStatus = function(status, callback) {
     });
 };
 
-exports.getByDayAndStatuses = function(day, statuses, populate, callback) {
+exports.getByDayAndStatuses = function(day, statuses) {
     let query = Match.find(
         { 
             day: day,
@@ -61,20 +53,11 @@ exports.getByDayAndStatuses = function(day, statuses, populate, callback) {
             },
         });
 
-    if (populate) {
-        query.populate('league', 'name')
-            .populate('homeTeam', ['_id', 'name', 'logo'])
-            .populate('guestTeam', ['_id', 'name', 'logo'])
-    }
+    query.populate('league', 'name')
+        .populate('homeTeam', ['_id', 'name', 'logo'])
+        .populate('guestTeam', ['_id', 'name', 'logo']);
         
-    query.exec(function(err, matches) {
-        if (err) {
-            console.log('Error occurred during fetching matches data from db', err);
-            callback([]);
-        }
-
-        callback(matches);
-    });
+    return query.exec();
 };
 
 exports.getByTeamId = function(teamId, callback) {
@@ -106,24 +89,16 @@ exports.getByTeamId = function(teamId, callback) {
     });
 }
 
-exports.getLiveMatches = function(callback) {
-    let today = simulator.getDay();
-    
-    Match.find(
+exports.getLiveMatches = function() {
+    let query = Match.find(
         { 
             status: {
                 $in: ['INPLAY', 'FINISHED']
             },
-            day: today
-        })
-        .exec(function(err, matches) {
-            if (err) {
-                console.log('Error occurred during fetching live matches data from db', err);
-                callback([]);
-            }
-
-            callback(matches);
+            day: simulator.getDay()
         });
+
+    return query.exec();
 }
 
 exports.getTeamLastMatches = function(teamId, numMatches) {
@@ -149,21 +124,36 @@ exports.getTeamLastMatches = function(teamId, numMatches) {
 }
 
 exports.startMatches = function(day, time) {
-    Match.updateMany(
+    Match.find(
         { 
             day: day, 
             time: time,
             status: 'NOT_STARTED'
-        },
-        { 
-            $set: { 
-                status: 'INPLAY', 
-                minute: 0, 
-                homeScore: 0, 
-                guestScore: 0 
-            } 
         }
-    ).exec();
+    )
+    .populate('homeTeam')
+    .populate('guestTeam')
+    .exec((err, matches) => {
+        if (err) {
+            console.log('Error occurred during fetching scheduled matches data from db', err);
+        } else {
+            matches.forEach(match => {
+                match.status = 'INPLAY';
+                match.minute = 0;
+                match.homeScore = 0;
+                match.guestScore = 0;
+
+                if (match.homeTeam.favourite) {
+                    notificationController.create(match.homeTeam, match);
+                }
+                if (match.guestTeam.favourite) {
+                    notificationController.create(match.guestTeam, match);
+                }
+
+                match.save();
+            });
+        }
+    });
 }
 
 // for testing
