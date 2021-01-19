@@ -23,3 +23,17 @@ exports.create = function(team, match) {
         }
     });
 }
+
+exports.get = function(matches) {
+    let query = Notification.find(
+        { 
+            seen: false,
+            match: {
+                $in: matches
+            }
+        });
+
+    query.populate('team');
+
+    return query.exec();
+}

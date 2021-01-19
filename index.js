@@ -27,6 +27,7 @@ app.use('/api/time', require('./routes/time'));
 app.use('/api/team', require('./routes/team'));
 app.use('/api/matches', require('./routes/matches'));
 app.use('/api/standings', require('./routes/standings'));
+app.use('/api/notifications', require('./routes/notification'));
 
 const PORT = process.env.PORT || 5000;
 

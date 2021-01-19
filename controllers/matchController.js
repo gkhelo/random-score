@@ -31,17 +31,8 @@ exports.getByDay = function(day) {
     return query.exec()
 };
 
-exports.getByStatus = function(status, callback) {
-    let query = Match.find({ status: status });
-
-    query.exec(function(err, matches) {
-        if (err) {
-            console.log('Error occurred during fetching matches data from db', err);
-            callback([]);
-        }
-
-        callback(matches);
-    });
+exports.getByStatus = function(status) {
+    return Match.find({ status: status }).exec();
 };
 
 exports.getByDayAndStatuses = function(day, statuses) {

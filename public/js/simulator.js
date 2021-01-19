@@ -31,8 +31,20 @@ const Simulator = {
             });
     },
 
+    fetchNotifications() {
+        fetch('/api/notifications')
+            .then(response => response.json())
+            .then(notifications => {
+                console.log(notifications);
+            })
+            .catch(error => {
+                console.log('Error occured during fetching notifications:', error);
+            });
+    },
+
     start() {
         setInterval(this.fetchLiveMatches, 1000);
         setInterval(this.fetchStandings, 60000);
+        setInterval(this.fetchNotifications, 30000);
     }
 }
