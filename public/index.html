@@ -16,6 +16,7 @@
         <link rel="stylesheet" href="./css/matchesfilter.css">
         <link rel="stylesheet" href="./css/calendar.css">
         <link rel="stylesheet" href="./css/teaminfo.css">
+        <link rel="stylesheet" href="./css/notification.css">
 
         <script src="./js/main.js"></script>
         <script src="./js/render.js"></script>
@@ -27,6 +28,7 @@
         <script src="./js/matchesfilter.js"></script>
         <script src="./js/time.js"></script>
         <script src="./js/team.js"></script>
+        <script src="./js/notification.js"></script>
     </head>
 
     <body onload="startup()">
@@ -37,9 +39,17 @@
                 </div>
                 <nav>
                     <ul>
-                        <li id="search-menu"><img src="./images/search.png"/></li>
-                        <li id="best-teams-menu"><img src="./images/ball.png"/></li>
-                        <li id="best-leagues-menu"><img src="./images/trophy.png"/></li>
+                        <li>
+                            <div class="search-button">
+                                <img src="./images/search.png"/>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="notifications-button">
+                                <img src="./images/ball.png"/>
+                                <div class="notifications-count" id="notifications-count"></div>
+                            </div>
+                        </li>
                     </ul>
                 </nav>
             </div>

@@ -8,9 +8,13 @@ var router = express.Router();
 router.get('/', (req, res) => {
     matchController.getByStatus('INPLAY')
     .then(notificationController.get)
-    .then(notifications => {
-        res.send(JSON.stringify(notifications));
-    })
-});
+    .then(notifications => res.send(JSON.stringify(notifications)));
+})
+
+router.get('/count', (req, res) => {
+    matchController.getByStatus('INPLAY')
+    .then(notificationController.count)
+    .then(count => res.send(JSON.stringify(count)));
+})
 
 module.exports = router;

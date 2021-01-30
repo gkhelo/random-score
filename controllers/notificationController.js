@@ -37,3 +37,15 @@ exports.get = function(matches) {
 
     return query.exec();
 }
+
+exports.count = function(matches) {
+    let query = Notification.where(
+        { 
+            seen: false,
+            match: {
+                $in: matches
+            }
+        });
+
+    return query.countDocuments();
+}

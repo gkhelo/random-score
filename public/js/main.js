@@ -2,7 +2,7 @@
 function startup() {
     Time.start(() => {
         render();
-        initialize();
+        // initialize();
 
         Simulator.start();
     });
@@ -13,6 +13,7 @@ function render() {
     Render.standings();
 }
 
+// TODO: maybe delete this popups in future
 function initialize() {
     initializeMenuButtons();
 }
