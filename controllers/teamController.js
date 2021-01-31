@@ -22,6 +22,19 @@ exports.getById = function(id, callback) {
     });
 }
 
+exports.getByName = function(name, callback) {
+    Team.findOne({ name: name })
+        .populate('league', ['_id', 'name', 'promotions', 'relegations'])
+        .exec((err, team) => {
+        if (err) {
+            console.log('Error occurred during fetching teams data from db', err);
+            callback(null);
+        }
+
+        callback(team);
+    });
+}
+
 exports.getByLeagueId = function(leagueId, callback) {
     Team.find({ league: leagueId }).exec((err, teams) => {
         if (err) {

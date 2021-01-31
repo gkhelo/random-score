@@ -48,30 +48,6 @@ const Popup = {
     }
 }
 
-const SearchBarPopup = {
-    content() {
-        let content = document.createElement('div');
-        content.innerHTML = '<p style="padding-left: 15px">Search Bar Content</p>';
-        return content;
-    }
-}
-
-const BestTeamsPopup = {
-    content() {
-        let content = document.createElement('div');
-        content.innerHTML = '<p style="padding-left: 15px">Best Teams Content</p>';
-        return content;
-    }
-}
-
-const BestLeaguesPopup = {
-    content() {
-        let content = document.createElement('div');
-        content.innerHTML = '<p style="padding-left: 15px">Best Leagues Content</p>';
-        return content;
-    }
-}
-
 const TeamPopup = {
     content(info) {
         let content = document.createElement('div');
@@ -140,6 +116,9 @@ const TeamPopup = {
 
         tabsDiv.appendChild(this.tab('Results', 
             this.matchesContent(Match.filter(info.matches, 'FINISHED')), true));
+
+        tabsDiv.appendChild(this.tab('Live', 
+            this.matchesContent(Match.filter(info.matches, 'INPLAY')), false));
 
         tabsDiv.appendChild(this.tab('Fixtures', 
             this.matchesContent(Match.filter(info.matches, 'NOT_STARTED')), false));
