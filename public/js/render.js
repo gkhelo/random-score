@@ -26,5 +26,9 @@ const Render = {
             .catch(error => {
                 console.log('Error occured during rendering standings:', error);
             });
+    },
+
+    slideshow() {
+        Slideshow.create();
     }
 }

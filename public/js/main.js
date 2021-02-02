@@ -11,6 +11,7 @@ function startup() {
 function render() {
     Render.matches(Time.day() || 1);
     Render.standings();
+    Render.slideshow();
 }
 
 function initialize() {
