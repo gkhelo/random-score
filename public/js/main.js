@@ -16,4 +16,5 @@ function render() {
 
 function initialize() {
     Initializer.search();
+    Initializer.notification();
 }

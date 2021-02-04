@@ -115,3 +115,7 @@
     grid-template-columns: 1fr 1fr;
     gap: 1em;
 }
+
+.match-animation {
+    animation: shake 0.5s;
+}

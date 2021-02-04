@@ -27,5 +27,35 @@
 }
 
 .notifications {
+    position: relative;
+}
+
+.notifications-content {
     display: none;
+    max-height: 400px;
+    overflow-y: scroll;
+
+    position: absolute;
+    top: 60px;
+    right: -10px;
+    width: 400px;
+
+    background-color: #eee;
+    color: #000000;
+
+    z-index: 2;
+}
+
+.notification {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    font-size: 20px;
+    margin: 5px;
+}
+
+.notification:hover {
+    cursor: pointer;
+    background-color: #3eb650;
 }
