@@ -1,6 +1,7 @@
 
 import { getDay } from './time.js';
 import { create as createSlideshow } from './slideshow.js';
+import { MatchesFilter } from './matchesfilter.js';
 
 export function render() {
     matches(getDay() || 1);
@@ -8,7 +9,7 @@ export function render() {
     slideshow();
 }
 
-function matches(day) {
+export function matches(day) {
     fetch('/api/matches/filter/' + day)
         .then(response => response.json())
         .then(allLeagueMatches => {

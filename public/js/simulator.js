@@ -1,6 +1,7 @@
 
 import { getDay } from './time.js';
 import { updateCount as updateNotificationsCount } from './notification.js';
+import { MatchesFilter } from './matchesfilter.js';
 
 export function simulate() {
     setInterval(fetchLiveMatches, 1000);

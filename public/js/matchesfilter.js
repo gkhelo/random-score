@@ -1,4 +1,7 @@
-const MatchesFilter = {
+
+import { matches as renderMatches } from './render.js';
+
+export const MatchesFilter = {
     create(day) {
         let mainDiv = document.createElement('div');
         mainDiv.className = 'matches-filter';
@@ -122,7 +125,7 @@ const MatchesFilter = {
                 
                 document.getElementById('expanded-calendar').style.display = 'none';
                 
-                Render.matches(day);
+                renderMatches(day);
             });
 
             if (day == today) {
