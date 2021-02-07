@@ -49,3 +49,14 @@ exports.count = function(matches) {
 
     return query.countDocuments();
 }
+
+exports.seen = function(id) {
+    Notification.findById(id, (err, res) => {
+        if (err) {
+            console.log('Error occurred during notification update:', err);
+        } else {
+            res.seen = true;
+            res.save();
+        }
+    });
+}

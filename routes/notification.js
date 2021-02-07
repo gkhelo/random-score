@@ -17,4 +17,8 @@ router.get('/count', (req, res) => {
     .then(count => res.send(JSON.stringify(count)));
 })
 
+router.post('/seen/:id', (req, res) => {
+    notificationController.seen(req.params.id);
+})
+
 module.exports = router;

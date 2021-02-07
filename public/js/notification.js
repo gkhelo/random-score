@@ -28,6 +28,8 @@ const Notification = {
                 </div>
             `;
             li.addEventListener('click', () => {
+                Notification.seen(notification._id);
+                
                 let matchDiv = document.getElementById(notification.match);
                 matchDiv.classList.remove('match-animation');
                 
@@ -44,5 +46,12 @@ const Notification = {
         });
 
         contentDiv.appendChild(ul);
+    },
+
+    seen(id) {
+        fetch('/api/notifications/seen/' + id, { method: 'POST'} )
+            .catch(error => {
+                console.log('Error occured during updating notification info:', error);
+            });
     }
 }
