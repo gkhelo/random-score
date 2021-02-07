@@ -1,20 +1,13 @@
 
-function startup() {
-    Time.start(() => {
+import { start } from './time.js'
+import { render } from './render.js';
+import { initialize } from './initializer.js';
+import { simulate } from './simulator.js';
+
+window.addEventListener('load', () => {
+    start(() => {
         render();
         initialize();
-
-        Simulator.start();
+        simulate();
     });
-}
-
-function render() {
-    Render.matches(Time.day() || 1);
-    Render.standings();
-    Render.slideshow();
-}
-
-function initialize() {
-    Initializer.search();
-    Initializer.notification();
-}
+});

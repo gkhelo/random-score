@@ -1,63 +1,60 @@
-const Slideshow = {
-    create() {
-        let mainDiv = document.getElementById('slideshow');
 
-        mainDiv.appendChild(this.img());
-        mainDiv.appendChild(this.prev());
-        mainDiv.appendChild(this.next());
-    },
+export function create() {
+    let mainDiv = document.getElementById('slideshow');
 
-    img() {
-        let div = document.createElement('div');
-        div.className = 'slide';
+    mainDiv.appendChild(img());
+    mainDiv.appendChild(prev());
+    mainDiv.appendChild(next());
+}
 
-        let img = document.createElement('img');
-        img.id = 'current-slide';
-        img.setAttribute('cur', 1);
-        img.src = './images/slides/slide1.jpg';
+function img() {
+    let div = document.createElement('div');
+    div.className = 'slide';
 
-        div.appendChild(img);
-        return div;
-    },
+    let img = document.createElement('img');
+    img.id = 'current-slide';
+    img.setAttribute('cur', 1);
+    img.src = './images/slides/slide1.jpg';
 
-    prev() {
-        let a = document.createElement('a');
-        a.className = 'prev';
+    div.appendChild(img);
+    return div;
+}
 
-        a.innerHTML = '&#10094';
-        a.addEventListener('click', () => {
-            console.log('prev');
-            this.change(-1);
-        });
+function prev() {
+    let a = document.createElement('a');
+    a.className = 'prev';
 
-        return a;
-    },
+    a.innerHTML = '&#10094';
+    a.addEventListener('click', () => {
+        change(-1);
+    });
 
-    next() {
-        let a = document.createElement('a');
-        a.className = 'next';
+    return a;
+}
 
-        a.innerHTML = '&#10095';
-        a.addEventListener('click', () => {
-            console.log('next');
-            this.change(1);
-        });
+function next() {
+    let a = document.createElement('a');
+    a.className = 'next';
 
-        return a;
-    },
+    a.innerHTML = '&#10095';
+    a.addEventListener('click', () => {
+        change(1);
+    });
 
-    change(num) {
-        let img = document.getElementById('current-slide');
-        let cur = parseInt(img.getAttribute('cur')) + num;
+    return a;
+}
 
-        if (cur < 1) {
-            cur = 3;
-        }
-        if (cur > 3) {
-            cur = 1;
-        }
+function change(num) {
+    let img = document.getElementById('current-slide');
+    let cur = parseInt(img.getAttribute('cur')) + num;
 
-        img.src = './images/slides/slide' + cur + '.jpg';
-        img.setAttribute('cur', cur);
+    if (cur < 1) {
+        cur = 3;
     }
+    if (cur > 3) {
+        cur = 1;
+    }
+
+    img.src = './images/slides/slide' + cur + '.jpg';
+    img.setAttribute('cur', cur);
 }

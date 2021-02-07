@@ -1,50 +1,40 @@
 var day = 1, hour, minute;
 
-const Time = {
-    fetchTime(cb) {
-        fetch('/api/time')
-            .then(response => response.json())
-            .then(time => {
-                day = time.day;
-                hour = time.hour;
-                minute = time.minute;
+export function start(cb) {
+    fetchTime(cb);
+    setInterval(fetchTime, 1000);
+}
 
-                Time.update();
-                if (cb != null) {
-                    cb();
-                }
-            })
-            .catch(error => {
-                console.log('Error occured during fetching time:', error);
-            });
-    },
+export function getDay() {
+    return day;
+}
 
-    start(cb) {
-        this.fetchTime(cb);
-        setInterval(this.fetchTime, 1000);
-    },
+function fetchTime(cb) {
+    fetch('/api/time')
+        .then(response => response.json())
+        .then(time => {
+            day = time.day;
+            hour = time.hour;
+            minute = time.minute;
 
-    day() {
-        return day;
-    },
+            update();
+            if (cb != null) {
+                cb();
+            }
+        })
+        .catch(error => {
+            console.log('Error occured during fetching time:', error);
+        });
+}
 
-    hour() {
-        return hour;
-    },
-
-    minute() {
-        return minute;
-    },
-
-    time() {
-        if (minute > 9) {
-            return 'Day ' + day + ' - ' + hour + ':' + minute;
-        } else {
-            return 'Day ' + day + ' - ' + hour + ':0' + minute;
-        }
-    },
-
-    update() {
-        document.getElementById('system-time').innerHTML = Time.time();
+function time() {
+    if (minute > 9) {
+        return 'Day ' + day + ' - ' + hour + ':' + minute;
+    } else {
+        return 'Day ' + day + ' - ' + hour + ':0' + minute;
     }
+}
+
+function update() {
+    document.getElementById('system-time').innerHTML = time();
 }
