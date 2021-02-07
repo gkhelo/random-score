@@ -37,7 +37,7 @@
 
 .team-info-tabs {
     display: flex;
-    flex-direction: row;
+    flex-flow: row nowrap;
     border-bottom: #3eb650 2px solid;
 }
 
@@ -64,4 +64,15 @@
 .team-info-content {
     margin-top: 15px;
     width: 100%;
+}
+
+@media only screen and (max-width: 600px) {
+    .team-info-tabs {
+        align-items: center;
+    }
+
+    .team-info-tab {
+        padding: 0 5px;
+        font-size: 18px;
+    }
 }

@@ -4,7 +4,7 @@ var resultController = require('../controllers/resultController');
 var utils = require('./utils');
 var random = require('./random');
 
-var day = 6, hour = 14, minute = 55;
+var day = 16, hour = 14, minute = 55;
 var interval;
 
 function logTime() {
@@ -47,7 +47,7 @@ function startMatches() {
 }
 
 function updateMatches() {
-    matchController.getByStatus('INPLAY', matches => {
+    matchController.getByStatus('INPLAY').then(matches => {
         matches.forEach(match => {
             match.minute++;
 
@@ -82,8 +82,8 @@ function go() {
 }
 
 exports.start = function() {
-    matchController.startup();
-    resultController.startup();
+    // matchController.startup();
+    // resultController.startup();
 
     interval = setInterval(go, 1000);
 }

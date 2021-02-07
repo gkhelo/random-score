@@ -182,8 +182,9 @@ const Match = {
     createScore(matchId, homeScore, guestScore, status) {
         let scoreDiv = document.createElement('div');
         scoreDiv.className = 'match-score';
+        scoreDiv.setAttribute('status', status)
         scoreDiv.addEventListener('click', () => {
-            if (status == 'NOT_STARTED') {
+            if (scoreDiv.getAttribute('status') == 'NOT_STARTED') {
                 Match.fetchPreview(matchId, info => {
                     Popup.show('Match Preview', MatchPreviewPopup.content(info));
                 })
@@ -191,8 +192,10 @@ const Match = {
         });
 
         if (status == 'NOT_STARTED') {
+            scoreDiv.classList.add('preview');
             scoreDiv.innerText = 'Preview';
         } else {
+            scoreDiv.classList.remove('preview');
             this.updateScore(homeScore, guestScore, status, scoreDiv);
         }
 
@@ -200,7 +203,9 @@ const Match = {
     },
 
     updateScore(homeScore, guestScore, status, scoreDiv) {
+        scoreDiv.setAttribute('status', status)
         if (status == 'INPLAY') {
+            scoreDiv.classList.remove('preview');
             scoreDiv.classList.add('match-live');
         } else if (status == 'FINISHED') {
             scoreDiv.classList.remove('match-live');

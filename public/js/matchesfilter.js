@@ -1,5 +1,6 @@
 
 import { matches as renderMatches } from './render.js';
+import { getDay } from './time.js';
 
 export const MatchesFilter = {
     create(day) {
@@ -130,6 +131,9 @@ export const MatchesFilter = {
 
             if (day == today) {
                 dayLi.classList.add('today');
+            }
+            if (day == getDay()) {
+                dayLi.classList.add('live');
             }
 
             daysUl.appendChild(dayLi);

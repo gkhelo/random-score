@@ -5,12 +5,18 @@ const Standings = {
         let title = Collapsible.create('Leagues', '#fcc133', '#000000');
 
         let standingsUl = document.createElement('ul');
+        let isFirst = true;
         leagueStandings.forEach(leagueStanding => {
             let standingsLi = document.createElement('li');
             let singleLeagueDiv = document.createElement('div');
             singleLeagueDiv.className = 'single-league';
 
-            let table = this.createTable(leagueStanding, 'none', [-1]);
+            let display = 'none';
+            if (isFirst) {
+                display = 'block';
+                isFirst = false;
+            }
+            let table = this.createTable(leagueStanding, display, [-1]);
 
             singleLeagueDiv.appendChild(this.createButton(leagueStanding.name, table));
             singleLeagueDiv.appendChild(table);
@@ -109,7 +115,10 @@ const Standings = {
         }
         tr.innerHTML = `
             <td>${position}</td>
-            <td>${result.team.name}</td>
+            <td>
+                <span class="standings-team-name">${result.team.name}</span>
+                <span class="standings-team-logo"><img class="team-logo" src="${result.team.logo}" /></span>
+            </td>
             <td>${result.matches}</td>
             <td>${result.win}</td>
             <td>${result.draw}</td>

@@ -56,7 +56,11 @@
 }
 
 .today {
-    color: #3eb650;
+    background: #3eb650;
+}
+
+.live {
+    background: #e12b38;
 }
 
 .day:hover {

@@ -32,3 +32,19 @@
     position: relative;
     width: 20%;
 }
+
+@media only screen and (max-width: 600px) {
+    .matches-filter {
+        flex-flow: column nowrap;
+        text-align: center;
+        align-items: center;
+    }
+
+    .status-filter {
+        width: 60%;
+    }
+
+    .day-filter {
+        width: 80%;
+    }
+}

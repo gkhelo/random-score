@@ -59,3 +59,18 @@
     cursor: pointer;
     background-color: #3eb650;
 }
+
+@media only screen and (max-width: 600px) {
+    .notifications-content {
+        width: 300px;
+        background: #fcc133;
+    }
+
+    .notification-team-name {
+        display: none;
+    }
+
+    .notification {
+        justify-content: unset;
+    }
+}

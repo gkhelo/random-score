@@ -63,6 +63,20 @@
     background-color: #ff7b21;
 }
 
+.standings-team-logo {
+    display: none;
+}
+
+@media only screen and (max-width: 600px) {
+    .standings-team-logo {
+        display: block;
+    }
+
+    .standings-team-name {
+        display: none;
+    }   
+}
+
 /* .tournament-table-top td {
 	color: #77ff21;
 }

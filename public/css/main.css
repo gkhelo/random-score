@@ -49,11 +49,11 @@ header a {
     font-size: 38px;
 }
 
-header #branding {
+.branding {
     float: left;
 }
 
-header #branding h1 {
+.branding h1 {
     margin: 0
 }
 
@@ -62,14 +62,15 @@ header .highlight {
     font-weight: bold;
 }
 
-header li {
+.tools > div {
     float: left;
     display: inline;
     padding: 0 20px;
 }
 
-header nav {
+.tools {
     float: right;
+    text-align: center;
 }
 
 /* search box */
@@ -232,6 +233,61 @@ footer {
 .site-title {
     color: #fcc133;
     border-bottom: #fcc133 1px solid;
+}
+
+@media only screen and (max-width: 600px) {
+    body {
+        width: 100%;
+    }
+
+    header {
+        min-height: 120px;
+    }
+
+    .branding {
+        float: none;
+        text-align: center;
+    }
+
+    .tools {
+        float: none;
+    }
+
+    .tools .search-box {
+        display: none;
+    }
+
+    .tools .notifications {
+        float: none;
+        margin-top: 10px;
+        display: flex;
+        justify-content: center;
+    }
+
+    header li {
+        float: none;
+        text-align: center;
+    }
+
+    header a {
+        font-size: 28px;
+    }
+
+    .search-box {
+        display: none;
+    }
+
+    .slideshow {
+        display: none;
+    }
+
+    .grid {
+        display: block;
+    }
+
+    .footer-content {
+        display: block;
+    }
 }
 
 /* good color combinations for this website:  292930, 3eb650, fcc133, e12b38 */

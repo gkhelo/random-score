@@ -22,7 +22,7 @@ export function show(notifications) {
                     <img src="${notification.team.logo}" style="max-width:24px; max-height:24px" />
                 </div>
                 <div style="margin-left: 5px">
-                    ${notification.team.name} started a match
+                    <span class="notification-team-name">${notification.team.name}</span> started a match
                 </div>
             </div>
         `;
