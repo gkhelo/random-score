@@ -1,11 +1,12 @@
 var express = require('express');
 var path = require('path');
+require('dotenv').config();
 
 var app = express();
 
 // Set up mongoose connection
 var mongoose = require('mongoose');
-var mongoDB = 'mongodb://127.0.0.1/test';
+var mongoDB = process.env.DB;
 mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false });
 mongoose.Promise = global.Promise;
 var db = mongoose.connection;

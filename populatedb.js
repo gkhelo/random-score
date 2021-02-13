@@ -2,6 +2,8 @@ var fs = require('fs');
 var path = require('path');
 var async = require('async');
 
+require('dotenv').config();
+
 var League = require('./models/league');
 var Team = require('./models/team');
 var Match = require('./models/match');
@@ -10,7 +12,7 @@ var Result = require('./models/result');
 var generator = require('./services/generator');
 
 var mongoose = require('mongoose');
-var mongoDB = 'mongodb://127.0.0.1/test';
+var mongoDB = process.env.DB;
 mongoose.connect(mongoDB, {useNewUrlParser: true, useUnifiedTopology: true});
 mongoose.Promise = global.Promise;
 var db = mongoose.connection;
