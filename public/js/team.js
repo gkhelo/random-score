@@ -1,6 +1,6 @@
 const Team = {
     fetchTeamInfo(id, cb) {
-        fetch('/api/team/' + id)
+        fetch(Server.getUrl('/api/team/' + id))
             .then(response => response.json())
             .then(cb)
             .catch(error => {
@@ -9,18 +9,23 @@ const Team = {
     },
 
     fetchTeamInfoByName(name, cb) {
-        fetch('/api/team/name/' + name)
+        fetch(Server.getUrl('/api/team/name/' + name))
             .then(response => response.json())
             .then(cb)
             .catch(error => {
                 console.log('Error occured during fetching team info:', error);
+                cb(JSON.stringify({
+                    status: 'error'
+                }));
             });
     },
 
     updateTeamFavourite(id) {
-        fetch('/api/team/favourite/' + id, { method: 'POST'} )
-            .catch(error => {
-                console.log('Error occured during updating team favourite info:', error);
-            });
+        if (Server.isAvailable) {
+            fetch('/api/team/favourite/' + id, { method: 'POST'} )
+                .catch(error => {
+                    console.log('Error occured during updating team favourite info:', error);
+                });
+        }
     }
 }

@@ -145,6 +145,10 @@ header .highlight {
     max-height: 100%;
 }
 
+.slide > img:hover {
+    cursor: unset;
+}
+
 .prev, .next {
     cursor: pointer;
     position: absolute;

@@ -30,15 +30,17 @@ export function show(notifications) {
             seen(notification._id);
             
             let matchDiv = document.getElementById(notification.match);
-            matchDiv.classList.remove('match-animation');
-            
-            contentDiv.style.display = 'none';
-            contentDiv.innerHTML = '';
+            if (matchDiv != null) {
+                matchDiv.classList.remove('match-animation');
+                
+                contentDiv.style.display = 'none';
+                contentDiv.innerHTML = '';
 
-            window.location.hash = '';
-            window.location.hash = notification.match;
+                window.location.hash = '';
+                window.location.hash = notification.match;
 
-            matchDiv.classList.add('match-animation');
+                matchDiv.classList.add('match-animation');
+            }
         })
 
         ul.appendChild(li);
@@ -48,8 +50,10 @@ export function show(notifications) {
 }
 
 function seen(id) {
-    fetch('/api/notifications/seen/' + id, { method: 'POST'} )
-        .catch(error => {
-            console.log('Error occured during updating notification info:', error);
-        });
+    if (Server.isAvailable) {
+        fetch('/api/notifications/seen/' + id, { method: 'POST'} )
+            .catch(error => {
+                console.log('Error occured during updating notification info:', error);
+            });
+    }
 }

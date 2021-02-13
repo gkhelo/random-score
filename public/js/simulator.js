@@ -4,9 +4,13 @@ import { updateCount as updateNotificationsCount } from './notification.js';
 import { MatchesFilter } from './matchesfilter.js';
 
 export function simulate() {
-    setInterval(fetchLiveMatches, 1000);
-    setInterval(fetchStandings, 60000);
-    setInterval(fetchNotifications, 2000);
+    if (Server.isAvailable) {
+        setInterval(fetchLiveMatches, 1000);
+        setInterval(fetchStandings, 60000);
+        setInterval(fetchNotifications, 2000);
+    } else {
+        fetchNotifications();
+    }
 }
 
 function fetchLiveMatches() {
@@ -42,7 +46,7 @@ function fetchStandings() {
 }
 
 function fetchNotifications() {
-    fetch('/api/notifications/count')
+    fetch(Server.getUrl('/api/notifications/count'))
         .then(response => response.json())
         .then(updateNotificationsCount)
         .catch(error => console.log('Error occured during fetching notifications:', error));

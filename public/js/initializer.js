@@ -37,7 +37,7 @@ function notification() {
             contentDiv.innerHTML = '';
         } else {
             contentDiv.style.display = 'block';
-            fetch('/api/notifications/')
+            fetch(Server.getUrl('/api/notifications'))
                 .then(response => response.json())
                 .then(showNotifications)
                 .catch(error => console.log('Error occured during fetching notifications:', error));

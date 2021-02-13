@@ -2,7 +2,10 @@ var day = 1, hour, minute;
 
 export function start(cb) {
     fetchTime(cb);
-    setInterval(fetchTime, 1000);
+
+    if (Server.isAvailable) {
+        setInterval(fetchTime, 1000);
+    }
 }
 
 export function getDay() {
@@ -10,7 +13,7 @@ export function getDay() {
 }
 
 function fetchTime(cb) {
-    fetch('/api/time')
+    fetch(Server.getUrl('/api/time'))
         .then(response => response.json())
         .then(time => {
             day = time.day;

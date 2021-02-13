@@ -238,7 +238,7 @@ const Match = {
     },
 
     fetchPreview(matchId, callback) {
-        fetch('/api/matches/preview/' + matchId)
+        fetch(Server.getUrl('/api/matches/preview/' + matchId))
             .then(response => response.json())
             .then(callback)
             .catch(error => {

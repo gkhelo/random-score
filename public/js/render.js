@@ -10,7 +10,7 @@ export function render() {
 }
 
 export function matches(day) {
-    fetch('/api/matches/filter/' + day)
+    fetch(Server.getUrl('/api/matches/filter/' + day))
         .then(response => response.json())
         .then(allLeagueMatches => {
             let mainDiv = document.getElementById('matches');
@@ -27,7 +27,7 @@ export function matches(day) {
 }
 
 function standings() {
-    fetch('/api/standings')
+    fetch(Server.getUrl('/api/standings'))
         .then(response => response.json())
         .then(leagueStandings => {
             let allStandingsDiv = document.getElementById('standings');

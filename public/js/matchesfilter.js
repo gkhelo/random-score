@@ -58,7 +58,14 @@ export const MatchesFilter = {
     filterMatches(statuses) {
         let json = JSON.stringify(statuses);
         let selectedDay = this.getSelectedDay();
-        fetch('/api/matches/filter/' + selectedDay + '/' + json)
+        let url = '/api/matches/filter/' + selectedDay + '/' + json;
+        if (!Server.isAvailable) {
+            if (statuses.length == 0) {
+                statuses = 'empry';
+            }
+            url = '/local/api/matches/filter/' + selectedDay + '/' + statuses + '.json';
+        }
+        fetch(url)
             .then(response => response.json())
             .then(matches => {
                 Match.hideAll();

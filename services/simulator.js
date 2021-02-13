@@ -4,7 +4,7 @@ var resultController = require('../controllers/resultController');
 var utils = require('./utils');
 var random = require('./random');
 
-var day = 16, hour = 14, minute = 55;
+var day = 1, hour = 14, minute = 55;
 var interval;
 
 function logTime() {
@@ -39,7 +39,7 @@ function updateTime() {
     updateHour();
     updateDay();
 
-    logTime();
+    // logTime();
 }
 
 function startMatches() {

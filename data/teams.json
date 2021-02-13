@@ -268,240 +268,280 @@
     {
         "id": 39,
         "name": "Atalanta",
+        "code": "ATL",
         "logo": "https://cdn.sportdataapi.com/images/soccer/teams/100/109.png",
         "league_id": 3
     },
     {
         "id": 40,
         "name": "Parma",
+        "code": "PRM",
         "logo": "https://cdn.sportdataapi.com/images/soccer/teams/100/388.png",
         "league_id": 3
     },
     {
         "id": 41,
         "name": "Juventus",
+        "code": "JUV",
         "logo": "https://cdn.sportdataapi.com/images/soccer/teams/100/108.png",
         "league_id": 3
     },
     {
         "id": 42,
         "name": "Fiorentina",
+        "code": "FIO",
         "logo": "https://cdn.sportdataapi.com/images/soccer/teams/100/389.png",
         "league_id": 3
     },
     {
         "id": 43,
         "name": "Udinese",
+        "code": "UDI",
         "logo": "https://cdn.sportdataapi.com/images/soccer/teams/100/390.png",
         "league_id": 3
     },
     {
         "id": 44,
         "name": "AC Milan",
+        "code": "MIL",
         "logo": "https://cdn.sportdataapi.com/images/soccer/teams/100/391.png",
         "league_id": 3
     },
     {
         "id": 45,
         "name": "Torino",
+        "code": "TOR",
         "logo": "https://cdn.sportdataapi.com/images/soccer/teams/100/393.png",
         "league_id": 3
     },
     {
         "id": 46,
         "name": "Sassuolo",
+        "code": "SAS",
         "logo": "https://cdn.sportdataapi.com/images/soccer/teams/100/394.png",
         "league_id": 3
     },
     {
         "id": 47,
         "name": "Cagliari",
+        "code": "CAG",
         "logo": "https://cdn.sportdataapi.com/images/soccer/teams/100/395.png",
         "league_id": 3
     },
     {
         "id": 48,
         "name": "Sampdoria",
+        "code": "SAM",
         "logo": "https://cdn.sportdataapi.com/images/soccer/teams/100/397.png",
         "league_id": 3
     },
     {
         "id": 49,
         "name": "Lazio",
+        "code": "LAZ",
         "logo": "https://cdn.sportdataapi.com/images/soccer/teams/100/398.png",
         "league_id": 3
     },
     {
         "id": 50,
         "name": "Verona",
+        "code": "VER",
         "logo": "https://cdn.sportdataapi.com/images/soccer/teams/100/399.png",
         "league_id": 3
     },
     {
         "id": 51,
         "name": "Bologna",
+        "code": "BOL",
         "logo": "https://cdn.sportdataapi.com/images/soccer/teams/100/400.png",
         "league_id": 3
     },
     {
         "id": 52,
         "name": "AS Roma",
+        "code": "ROM",
         "logo": "https://cdn.sportdataapi.com/images/soccer/teams/100/401.png",
         "league_id": 3
     },
     {
         "id": 53,
         "name": "Genoa",
+        "code": "GEN",
         "logo": "https://cdn.sportdataapi.com/images/soccer/teams/100/402.png",
         "league_id": 3
     },
     {
         "id": 54,
         "name": "Inter",
+        "code": "INT",
         "logo": "https://cdn.sportdataapi.com/images/soccer/teams/100/94.png",
         "league_id": 3
     },
     {
         "id": 55,
         "name": "Spezia",
+        "code": "SPE",
         "logo": "https://cdn.sportdataapi.com/images/soccer/teams/100/2336.png",
         "league_id": 3
     },
     {
         "id": 56,
         "name": "Benevento",
+        "code": "BEN",
         "logo": "https://cdn.sportdataapi.com/images/soccer/teams/100/2340.png",
         "league_id": 3
     },
     {
         "id": 57,
         "name": "FC Crotone",
+        "code": "CRO",
         "logo": "https://cdn.sportdataapi.com/images/soccer/teams/100/2356.png",
         "league_id": 3
     },
     {
         "id": 58,
         "name": "Napoli",
+        "code": "NAP",
         "logo": "https://cdn.sportdataapi.com/images/soccer/teams/100/102.png",
         "league_id": 3
     },
     {
         "id": 59,
         "name": "Sevilla",
+        "code": "SEV",
         "logo": "https://cdn.sportdataapi.com/images/soccer/teams/100/128.png",
         "league_id": 4
     },
     {
         "id": 60,
         "name": "Valencia",
+        "code": "VAL",
         "logo": "https://cdn.sportdataapi.com/images/soccer/teams/100/103.png",
         "league_id": 4
     },
     {
         "id": 61,
         "name": "Real Madrid",
+        "code": "RMD",
         "logo": "https://cdn.sportdataapi.com/images/soccer/teams/100/113.png",
         "league_id": 4
     },
     {
         "id": 62,
         "name": "Barcelona",
+        "code": "FCB",
         "logo": "https://cdn.sportdataapi.com/images/soccer/teams/100/99.png",
         "league_id": 4
     },
     {
         "id": 63,
         "name": "Atl. Madrid",
+        "code": "ATM",
         "logo": "https://cdn.sportdataapi.com/images/soccer/teams/100/107.png",
         "league_id": 4
     },
     {
         "id": 64,
         "name": "Elche",
+        "code": "ELC",
         "logo": "https://cdn.sportdataapi.com/images/soccer/teams/100/2411.png",
         "league_id": 4
     },
     {
         "id": 65,
         "name": "Huesca",
+        "code": "HUE",
         "logo": "https://cdn.sportdataapi.com/images/soccer/teams/100/2455.png",
         "league_id": 4
     },
     {
         "id": 66,
         "name": "Cadiz",
+        "code": "CAD",
         "logo": "https://cdn.sportdataapi.com/images/soccer/teams/100/2380.png",
         "league_id": 4
     },
     {
         "id": 67,
         "name": "Alaves",
+        "code": "ALA",
         "logo": "https://cdn.sportdataapi.com/images/soccer/teams/100/125.png",
         "league_id": 4
     },
     {
         "id": 68,
         "name": "Granada",
+        "code": "GRA",
         "logo": "https://cdn.sportdataapi.com/images/soccer/teams/100/124.png",
         "league_id": 4
     },
     {
         "id": 69,
         "name": "Eibar",
+        "code": "EIB",
         "logo": "https://cdn.sportdataapi.com/images/soccer/teams/100/120.png",
         "league_id": 4
     },
     {
         "id": 70,
         "name": "Osasuna",
+        "code": "OSA",
         "logo": "https://cdn.sportdataapi.com/images/soccer/teams/100/122.png",
         "league_id": 4
     },
     {
         "id": 71,
         "name": "Ath Bilbao",
+        "code": "ATH",
         "logo": "https://cdn.sportdataapi.com/images/soccer/teams/100/116.png",
         "league_id": 4
     },
     {
         "id": 72,
         "name": "Getafe",
+        "code": "GET",
         "logo": "https://cdn.sportdataapi.com/images/soccer/teams/100/131.png",
         "league_id": 4
     },
     {
         "id": 73,
         "name": "Villarreal",
+        "code": "VIL",
         "logo": "https://cdn.sportdataapi.com/images/soccer/teams/100/123.png",
         "league_id": 4
     },
     {
         "id": 74,
         "name": "Valladolid",
+        "code": "VAL",
         "logo": "https://cdn.sportdataapi.com/images/soccer/teams/100/130.png",
         "league_id": 4
     },
     {
         "id": 75,
         "name": "Celta Vigo",
+        "code": "CEL",
         "logo": "https://cdn.sportdataapi.com/images/soccer/teams/100/117.png",
         "league_id": 4
     },
     {
         "id": 76,
         "name": "Levante",
+        "code": "LEV",
         "logo": "https://cdn.sportdataapi.com/images/soccer/teams/100/126.png",
         "league_id": 4
     },
     {
         "id": 77,
         "name": "Betis",
+        "code": "BET",
         "logo": "https://cdn.sportdataapi.com/images/soccer/teams/100/129.png",
         "league_id": 4
     },
     {
         "id": 78,
         "name": "Real Sociedad",
+        "code": "RSO",
         "logo": "https://cdn.sportdataapi.com/images/soccer/teams/100/118.png",
         "league_id": 4
     },
