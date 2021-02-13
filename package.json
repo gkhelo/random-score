@@ -14,6 +14,8 @@
     "mongoose": "5.11.8"
   },
   "devDependencies": {
+    "gulp": "^4.0.2",
+    "gulp-minify": "^3.1.0",
     "nodemon": "2.0.4"
   },
   "repository": {

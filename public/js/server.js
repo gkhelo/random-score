@@ -1,10 +1,1 @@
-
-const Server = {
-    isAvailable: true,
-
-    getUrl(url) {
-        return this.isAvailable ? url : '/local' + url + '.json';
-    }
-}
-
-console.log('server available:', Server.isAvailable);
+const Server={isAvailable:!0,getUrl(e){return this.isAvailable?e:"/local"+e+".json"}};console.log("server available:",Server.isAvailable);

@@ -16,6 +16,7 @@
 
 ## პრერეკვიზიტები
 - npm
+- gulp
 - Node.js
 - MongoDB
 
